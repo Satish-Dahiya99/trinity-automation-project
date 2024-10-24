@@ -28,7 +28,7 @@ public class ActivateEachServiceStep {
     }
 
     @And("click on carbon manage data")
-    public void clickoncarbonmanagedata(){
+    public void clickoncarbonmanagedata() throws InterruptedException {
         activateEachService.clickCarbonManageData();
     }
 
@@ -42,8 +42,13 @@ public class ActivateEachServiceStep {
         List<List<String>> data = filterData.asLists();
         activateEachService.selectFilter(data.get(1).get(0), data.get(1).get(1));
         activateEachService.selectFilter(data.get(2).get(0), data.get(2).get(1));
-        activateEachService.removeFilter("year");
+        activateEachService.removeFilter(data.get(4).get(1));
         activateEachService.selectFilter(data.get(3).get(0), data.get(3).get(1));
+    }
+
+    @And("remove data {string} for pre-selected filter")
+    public void removedataforpreselectedfilter(String filterData){
+        activateEachService.removeFilter(filterData);
     }
 
     @Then("click on add crop button")
@@ -99,6 +104,25 @@ public class ActivateEachServiceStep {
     @When("user clicks on delete button")
     public void userclicksondeletebutton() throws InterruptedException {
         activateEachService.clickDeleteButton();
+    }
+
+    @Then("click select all button for {string} field on Replicate records page")
+    public void clickselectallbuttonforonReplicaterecordspage(String butttonName) throws InterruptedException {
+        activateEachService.selectAllButtonOnReplicateRecordsPage(butttonName);
+
+    }
+
+    @And("user clicks on {string} delete button")
+    public void userclicksoNdeletebutton(String buttonName){
+        activateEachService.clickButtonOnDeletePopUp(buttonName);
+    }
+
+    @And("replicate filters for farm and fields")
+    public void replicatefiltersforfarmandfields(DataTable filterData) throws InterruptedException {
+        List<List<String>> data = filterData.asLists();
+        activateEachService.selectFilter(data.get(1).get(0), data.get(1).get(1));
+        activateEachService.selectFilter(data.get(2).get(0), data.get(2).get(1));
+
     }
 
 

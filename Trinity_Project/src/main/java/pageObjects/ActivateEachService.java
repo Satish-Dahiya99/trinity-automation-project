@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 import utilities.TestUtil;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -38,15 +39,20 @@ public class ActivateEachService extends BasePage{
     @FindBy(xpath = "(//*[@class='modal-footer']//button)[2]")
     WebElement yesDelete;
 
+    @FindBy(xpath = "(//*[@class='modal-footer']//button)[2]")
+    WebElement noDelete;
+
 
 
     String filterSelection = "//div[contains(@class,'"+dynamicText+"')]//div[contains(@id,'react-select')]";
-    String filterInput = "//div[contains(@class,'"+dynamicText+"')]//input";
-    String removeFilter = "(//div[contains(@class,'"+dynamicText+"')]//div[contains(@class,'-indicatorContainer')])[1]";
+    //String filterInput = "//div[contains(@class,'"+dynamicText+"')]//input";
+    String filterInput = "//div[text()='"+dynamicText+"']/..//input";
+    String removeFilter = "(//div[text()='"+dynamicText+"']/../../../following-sibling::div/div)[1]";
     String cropReqDataInput = "//*[text()='"+dynamicText+"']/..//input";
     String footerSaveOrCancel = "//div[contains(@class,'modal-footer')]//button[text()='"+dynamicText+"']";
     String successfulMessage = "//*[text()='Data "+dynamicText+" successfully']";
     String tillageType = "//div[contains(@class,'selectall-td selectcolumn row')]//div[text()='"+dynamicText+"']";
+    String selectAllButton = "//*[text()='"+dynamicText+"']/../..//button";
 
 
 
@@ -61,7 +67,9 @@ public class ActivateEachService extends BasePage{
         activateEachSearch.click();
     }
 
-    public void clickCarbonManageData(){
+    public void clickCarbonManageData() throws InterruptedException {
+        TestUtil.waitForElementClickable(driver, carbonManageData, Duration.of(10, ChronoUnit.SECONDS));
+        TestUtil.staticWait(4000);
         carbonManageData.click();
     }
 
@@ -72,18 +80,20 @@ public class ActivateEachService extends BasePage{
     }
 
     public void selectFilter(String filter, String data) throws InterruptedException {
-        WebElement filterSelect = prepareWebElementWithDynamicXpath(filterSelection , filter.toLowerCase());
-        TestUtil.waitForElementClickable(driver, filterSelect, Duration.of(10, ChronoUnit.SECONDS));
-        WebElement input = prepareWebElementWithDynamicXpath(filterInput, filter.toLowerCase());
-        TestUtil.staticWait(6000);
-        filterSelect.click();
-        TestUtil.waitForElementClickable(driver, input, Duration.of(10, ChronoUnit.SECONDS));
-        input.sendKeys(data);
+        WebElement input = prepareWebElementWithDynamicXpath(filterInput, filter);
+        try{
+            TestUtil.staticWait(8000);
+            input.sendKeys(data);
+        }catch (Exception e){
+            TestUtil.staticWait(2000);
+            javaScriptToEnterText(input, data);
+        }
         input.sendKeys(Keys.RETURN);
     }
 
-    public void removeFilter(String filter){
-        WebElement filterRemoval = prepareWebElementWithDynamicXpath(removeFilter, filter.toLowerCase());
+    public void removeFilter(String filterData){
+        WebElement filterRemoval = prepareWebElementWithDynamicXpath(removeFilter, filterData);
+        TestUtil.waitForElementClickable(driver, filterRemoval, Duration.of(10, ChronoUnit.SECONDS));
         filterRemoval.click();
     }
 
@@ -100,6 +110,7 @@ public class ActivateEachService extends BasePage{
         WebElement input = prepareWebElementWithDynamicXpath(cropReqDataInput, field);
         TestUtil.waitForElementClickable(driver, input, Duration.of(10, ChronoUnit.SECONDS));
         input.sendKeys(data);
+        TestUtil.staticWait(1000);
         input.sendKeys(Keys.RETURN);
 
     }
@@ -145,6 +156,23 @@ public class ActivateEachService extends BasePage{
     public void yesDeleteButton(){
         TestUtil.waitForElementClickable(driver, yesDelete, Duration.of(10, ChronoUnit.SECONDS));
         yesDelete.click();
+    }
+
+    public void selectAllButtonOnReplicateRecordsPage(String buttonName) throws InterruptedException {
+        WebElement ele = prepareWebElementWithDynamicXpath(selectAllButton, buttonName);
+        TestUtil.waitForElementClickable(driver, ele, Duration.of(10, ChronoUnit.SECONDS));
+        TestUtil.staticWait(5000);
+        ele.click();
+
+    }
+
+    public void clickButtonOnDeletePopUp(String buttonName){
+        if (buttonName.equalsIgnoreCase("Yes")){
+            yesDelete.click();
+        }else{
+            noDelete.click();
+        }
+
     }
 
 

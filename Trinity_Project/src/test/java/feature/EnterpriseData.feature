@@ -28,7 +28,7 @@ Feature: Enterprise Data
     And verify the success message as "Record deleted successfully."
 
 
-  @Test1
+  @Test
   Scenario: Add two fields then multiple edit and delete
 
     Given User logins to the application
