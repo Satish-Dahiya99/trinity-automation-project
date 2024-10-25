@@ -43,7 +43,7 @@ Feature: Activate service application
 
 
 
-  @Test1
+  @Test
   Scenario: Add new crop, Replicate Data, Edit multiple, Delete Multiple
 
     Given User logins to the application

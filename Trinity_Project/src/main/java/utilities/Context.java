@@ -11,6 +11,7 @@ public class Context extends BaseLib {
     private ActivateEachService activateEachService;
     private FarmSetup farmSetup;
     private EnterpriseData enterpriseData;
+    private BioDiversity bioDiversity;
 
     public Context(){
         setUp(FileReaderClass.readData("chromeBrowser"));
@@ -53,5 +54,12 @@ public class Context extends BaseLib {
             enterpriseData = new EnterpriseData(driver);
         }
         return enterpriseData;
+    }
+
+    public BioDiversity getBioDiversity(){
+        if (bioDiversity==null){
+            bioDiversity = new BioDiversity(driver);
+        }
+        return bioDiversity;
     }
 }

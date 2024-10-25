@@ -22,4 +22,9 @@ public class HomePageStep {
     public void userclicksonsandysetup(){
         homePage.navigateToSandySetup();
     }
+
+    @When("user clicks on biodiversity")
+    public void userclicksonbiodiversity(){
+        homePage.navigateToBioDiversity();
+    }
 }

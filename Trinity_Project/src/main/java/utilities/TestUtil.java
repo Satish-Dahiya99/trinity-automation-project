@@ -32,5 +32,11 @@ public class TestUtil {
         Thread.sleep(time);
     }
 
+    public static void waitForElementToDisappear(WebDriver driver, WebElement element, Duration timeOut){
+        WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        wait.until(ExpectedConditions.invisibilityOf(element));
+
+    }
+
 
 }
