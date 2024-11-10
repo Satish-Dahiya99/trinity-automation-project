@@ -133,4 +133,24 @@ public class BioDiversityStep {
     public void verifythetextonthebanner(String text) throws InterruptedException {
         bioDiversity.captureAndVerifyTextOnBanner(text);
     }
+
+    @Then("user search for {} report")
+    public void usersearchforreport(String reportName){
+        bioDiversity.userSearchForReport(reportName);
+    }
+
+    @And("click on view report button {string} report")
+    public void clickonviewreportbuttonreport(String reportName){
+        bioDiversity.clickOnViewReportButton(reportName);
+    }
+
+    @Then("verify the report name as {string} and current created date")
+    public void verifythereportnameasandcurrentcreateddate(String reportName){
+        bioDiversity.verifyReportTitleAndCreateDate(reportName);
+    }
+
+    @And("click arrow back button")
+    public void clickarrowbackbutton(){
+        bioDiversity.clickReportBackButton();
+    }
 }

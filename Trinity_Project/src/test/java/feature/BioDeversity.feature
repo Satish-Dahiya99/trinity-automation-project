@@ -18,14 +18,18 @@ Feature: BioDiversity
     When user clicks on biodiversity
     Then user navigates to "Dashboard"
     Then click on button "Create report"
-    Then user creates a report with name "aaabbcc"
-    When user clicks on biodiversity
+    Then user creates a report with name "AAA123"
     Then click on button menu "Reports"
-    And verify report "aaabbcc" is displayed on reports page
-    Then delete the report "aaabbcc"
-    And verify report "aaabbcc" is deleted
+    When user search for AAA123 report
+    And verify report "AAA123" is displayed on reports page
+    Then click on view report button "AAA123" report
+    And verify the report name as "AAA123" and current created date
+    Then click arrow back button
+    When user search for AAA123 report
+    Then delete the report "AAA123"
+    And verify report "AAA123" is deleted
 
-  @Test
+  @Test1
   Scenario: Verify Historic performance comparison dropdown
 
     Given User logins to the application
@@ -60,7 +64,7 @@ Feature: BioDiversity
     And click on improve biodiversity score button
     Then verify recommendations filters  is same as Biodiversity performance filters
 
-  @Test1
+  @Test
   Scenario: Verify farm and field filter on recommendation filter
 
     Given User logins to the application
@@ -82,6 +86,9 @@ Feature: BioDiversity
     And uncheck all the field names for "No insecticide" management practices
     Then click "Review Impact" banner button
     And verify the text on the banner as "Applying these practices can increase your biodiversity score to"
+
+
+    
 
 
 

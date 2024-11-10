@@ -1,6 +1,7 @@
 package pageObjects;
 
 import base.BaseLib;
+import javafx.util.converter.LocalDateStringConverter;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,10 +11,15 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import utilities.TestUtil;
 
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class BioDiversity extends BasePage{
 
@@ -29,7 +35,7 @@ public class BioDiversity extends BasePage{
     @FindBy(xpath = "//*[@id='modal-description']/../..//button[text()='Create report']")
     WebElement createReportButton;
 
-    @FindBy(xpath = "(//div[@role='rowgroup'])[2]/div/div[2]/div")
+    @FindBy(xpath = "(//div[@role='rowgroup'])[2]/div/div[2]")
     List<WebElement> reportName;
 
     @FindBy(xpath = "//div[contains(@class,'select__menu-list select__')]//div[text()]")
@@ -65,19 +71,31 @@ public class BioDiversity extends BasePage{
     @FindBy(xpath = "//div[@class='banner-container-bottom']//p")
     WebElement bannerText;
 
+    @FindBy(xpath = "//input[@placeholder='Search reports']")
+    WebElement searchReport;
+
+    @FindBy(xpath = "//div[@class='frame']//*[@class='title']")
+    WebElement reportTitle;
+
+    @FindBy(xpath = "//div[@class='frame']//p[text()='Created on']/following-sibling::p")
+    WebElement reportCreatedDate;
+
+    @FindBy(xpath = "//*[@data-testid='ArrowBackIcon']")
+    WebElement reportBackButton;
+
     String biodiversityMenu = "//*[@id='BIODIVERSITY']//a[contains(text(),'"+dynamicText+"')]";
     String biodiversityScore = "(//*[text()='"+dynamicText+"'])[1]";
-    String basicButton = "//div[text()='"+dynamicText+"']/../../div[8]//div[@id='basic-button']";
+    String basicButton = "//p[text()='"+dynamicText+"']/../../div[8]//div[@id='basic-button']";
     String deleteReportButton = "//*[@aria-labelledby]//li[text()='"+dynamicText+"']";
     String menuButton = "//span[text()='"+dynamicText+"']";
     String managementPractices = "//div[contains(@class,'MuiAccordionSummary-content')]//p[text()='"+dynamicText+"']";
     String fieldNameCheckBox = "(//p[text()='"+dynamicText+"']/../../../../..//input)[1]";
     String bannerButton = "//div[@class='banner-container-bottom']//button[text()='"+dynamicText+"']";
+    String viewReportButton = "//p[text()='"+dynamicText+"']/../../div[8]//a";
 
     static ArrayList<String> biodiversity_Filters = new ArrayList<>();
     private static String getPerformanceFarmName;
     private static String getPerformanceFieldName;
-
 
 
     Logger log = BaseLib.getLog(this.getClass().getName());
@@ -238,6 +256,29 @@ public class BioDiversity extends BasePage{
         TestUtil.staticWait(6000);
         Assert.assertTrue(bannerText.getText().contains(text));
     }
+
+    public void userSearchForReport(String reportName){
+        searchReport.sendKeys(reportName);
+    }
+
+    public void clickOnViewReportButton(String reportName){
+        WebElement ele = prepareWebElementWithDynamicXpath(viewReportButton, reportName);
+        ele.click();
+
+    }
+
+    public void verifyReportTitleAndCreateDate(String reportName){
+        Assert.assertTrue(reportTitle.getText().equalsIgnoreCase(reportName));
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("d MMMMMM yyyy");
+        String formattedDate = formatter.format(date);
+        Assert.assertTrue(formattedDate.equalsIgnoreCase(reportCreatedDate.getText()), formattedDate+" formatDate and locator date "+reportCreatedDate.getText());
+    }
+
+    public void clickReportBackButton(){
+        reportBackButton.click();
+    }
+
 
 
 
