@@ -3,15 +3,19 @@ package pageObjects;
 import base.BaseLib;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utilities.TestUtil;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 public class ActivateEachService extends BasePage{
 
@@ -42,8 +46,17 @@ public class ActivateEachService extends BasePage{
     @FindBy(xpath = "(//*[@class='modal-footer']//button)[2]")
     WebElement noDelete;
 
+    @FindBy(xpath = "//div[text()='Biodiversity']/..//button")
+    WebElement biodiversityManageData;
+
+    @FindBy(xpath = "(//div[text()='Crop variety']/ancestor::div[contains(@class,'MuiDataGrid-main')]//div[@role='rowgroup'])[2]/div[2]//div/div")
+    List<WebElement> bioDiversityCropNameGenInfo;
+
+    @FindBy(xpath = "//div[@role='presentation']//div[text()='No rows']")
+    WebElement noRows;
 
 
+    String manageDataButton = "//div[text()='"+dynamicText+"']/..//button";
     String filterSelection = "//div[contains(@class,'"+dynamicText+"')]//div[contains(@id,'react-select')]";
     //String filterInput = "//div[contains(@class,'"+dynamicText+"')]//input";
     String filterInput = "//div[text()='"+dynamicText+"']/..//input";
@@ -53,6 +66,9 @@ public class ActivateEachService extends BasePage{
     String successfulMessage = "//*[text()='Data "+dynamicText+" successfully']";
     String tillageType = "//div[contains(@class,'selectall-td selectcolumn row')]//div[text()='"+dynamicText+"']";
     String selectAllButton = "//*[text()='"+dynamicText+"']/../..//button";
+    String filterButton = "//div[text()='"+dynamicText+"']/..//div[@data-value]";
+    String bioDiversityGeneralInfo = "//div[contains(@class,'MuiBox-root')]//p[text()='"+dynamicText+"']/following-sibling::p";
+    String biodiversityActionButton = "//div[@data-field='actions']//*[contains(@data-testid,'"+dynamicText+"')]";
 
 
 
@@ -173,6 +189,83 @@ public class ActivateEachService extends BasePage{
             noDelete.click();
         }
 
+    }
+
+    public void clickManageDataButton(String buttonname){
+        WebElement ele = prepareWebElementWithDynamicXpath(manageDataButton, buttonname);
+        TestUtil.waitForElementClickable(driver, ele, Duration.of(10, ChronoUnit.SECONDS));
+        ele.click();
+    }
+
+    public void addFilterDataForBiodiversity(String field, String data) throws InterruptedException {
+        WebElement fieldInput = prepareWebElementWithDynamicXpath(cropReqDataInput, field);
+        TestUtil.waitForElementClickable(driver, fieldInput, Duration.of(10, ChronoUnit.SECONDS));
+        fieldInput.sendKeys(data);
+        TestUtil.staticWait(1000);
+        fieldInput.sendKeys(Keys.DOWN);
+        TestUtil.staticWait(1000);
+        fieldInput.sendKeys(Keys.RETURN);
+        TestUtil.staticWait(1000);
+    }
+
+    public void addCroppingDetailsForBiodiversity(String field, String data) throws InterruptedException {
+
+        WebElement input = prepareWebElementWithDynamicXpath(cropReqDataInput, field);
+        TestUtil.waitForElementClickable(driver, input, Duration.of(10, ChronoUnit.SECONDS));
+        TestUtil.staticWait(2000);
+        input.click();
+        input.sendKeys(Keys.BACK_SPACE);
+        TestUtil.staticWait(2000);
+        input.sendKeys(data);
+        TestUtil.staticWait(1000);
+        input.sendKeys(Keys.DOWN);
+        TestUtil.staticWait(1000);
+        input.sendKeys(Keys.RETURN);
+        TestUtil.staticWait(1000);
+
+    }
+
+    public void selectFilterForBiodiversity(String filter, String data) throws InterruptedException {
+        WebElement input = prepareWebElementWithDynamicXpath(filterInput, filter);
+        TestUtil.waitForElementClickable(driver, input, Duration.of(15, ChronoUnit.SECONDS));
+        TestUtil.staticWait(4000);
+        WebElement button = prepareWebElementWithDynamicXpath(filterButton, filter);
+        button.click();
+        TestUtil.staticWait(2000);
+
+            WebElement input1 = prepareWebElementWithDynamicXpath(filterInput, filter);
+            input1.sendKeys(data);
+            TestUtil.staticWait(2000);
+            input1.sendKeys(Keys.RETURN);
+
+    }
+
+    public void verifyGeneralInformationForBioDiversity(String fieldName, String data){
+        WebElement ele = prepareWebElementWithDynamicXpath(bioDiversityGeneralInfo, fieldName);
+        Assert.assertTrue(data.equalsIgnoreCase(ele.getText()));
+    }
+
+    public boolean verifyCropNameVarietyAndWorkingArea(String value){
+
+        for (WebElement ele : bioDiversityCropNameGenInfo){
+            if (ele.getText().equalsIgnoreCase(value)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void verifyValueOfCropNameVarietyAndWorkingArea(String data){
+        Assert.assertTrue(verifyCropNameVarietyAndWorkingArea(data));
+    }
+
+    public void performActionOnBiodiversityGeneralInformation(String actionName){
+        WebElement ele = prepareWebElementWithDynamicXpath(biodiversityActionButton, actionName);
+        ele.click();
+    }
+
+    public void verifyNowRorsAreDisplayed(){
+        Assert.assertTrue(noRows.isDisplayed());
     }
 
 

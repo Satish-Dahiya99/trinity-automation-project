@@ -8,6 +8,7 @@ import io.cucumber.java.en.When;
 import org.apache.logging.log4j.Logger;
 import pageObjects.ActivateEachService;
 import utilities.Context;
+import utilities.TestUtil;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class ActivateEachServiceStep {
         activateEachService.clickCroppingManageData();
     }
 
-    @And("Select filter with data to add crop")
+    @And("Select filter with data")
     public void Selectfilterwithdatatoaddcrop(DataTable filterData) throws InterruptedException {
         List<List<String>> data = filterData.asLists();
         activateEachService.selectFilter(data.get(1).get(0), data.get(1).get(1));
@@ -123,6 +124,69 @@ public class ActivateEachServiceStep {
         activateEachService.selectFilter(data.get(1).get(0), data.get(1).get(1));
         activateEachService.selectFilter(data.get(2).get(0), data.get(2).get(1));
 
+    }
+
+    @Then("click manage data button for {string}")
+    public void clickManageData(String buttonName){
+        activateEachService.clickManageDataButton(buttonName);
+    }
+
+    @Then("click on add records button")
+    public void clickonaddrecordsbutton() throws InterruptedException {
+        activateEachService.clickAddCropButton();
+    }
+
+    @And("enter cropped area details to calculate the impact of productive land")
+    public void entercroppedareadetailstocalculatetheimpactofproductiveland(DataTable fieldData) throws InterruptedException {
+        List<List<String>> data = fieldData.asLists();
+        activateEachService.addFilterDataForBiodiversity(data.get(1).get(0), data.get(1).get(1));
+        activateEachService.addFilterDataForBiodiversity(data.get(2).get(0), data.get(2).get(1));
+        activateEachService.addFilterDataForBiodiversity(data.get(3).get(0), data.get(3).get(1));
+        activateEachService.addCroppingDetailsForBiodiversity(data.get(4).get(0), data.get(4).get(1));
+        activateEachService.addCroppingDetailsForBiodiversity(data.get(5).get(0), data.get(5).get(1));
+        activateEachService.addCroppingDetailsForBiodiversity(data.get(6).get(0), data.get(6).get(1));
+    }
+
+    @Then("Select filter with data for biodiversity")
+    public void Selectfilterwithdataforbiodiversity(DataTable filterData) throws InterruptedException {
+        List<List<String>> data = filterData.asLists();
+        TestUtil.staticWait(8000);
+        activateEachService.selectFilterForBiodiversity(data.get(1).get(0), data.get(1).get(1));
+        activateEachService.selectFilterForBiodiversity(data.get(2).get(0), data.get(2).get(1));
+        activateEachService.selectFilterForBiodiversity(data.get(3).get(0), data.get(3).get(1));
+        activateEachService.selectFilterForBiodiversity(data.get(4).get(0), data.get(4).get(1));
+
+    }
+
+    @Then("verify {string} as {string} is displayed in general information")
+    public void verifyFarmDetailsingeneralinformation(String farmType, String farmName ){
+        activateEachService.verifyGeneralInformationForBioDiversity(farmType, farmName);
+    }
+
+    @And("verify below Crop name and crop variety and working area are displayed")
+    public void verifybelowCropnameandcropvarietyandworkingareaaredisplayed(DataTable dataTable){
+        List<List<String>> list = dataTable.asLists();
+        activateEachService.verifyValueOfCropNameVarietyAndWorkingArea(list.get(0).get(1));
+        activateEachService.verifyValueOfCropNameVarietyAndWorkingArea(list.get(1).get(1));
+        activateEachService.verifyValueOfCropNameVarietyAndWorkingArea(list.get(2).get(1));
+    }
+
+    @Then("{string} the data on general information section")
+    public void performActionongeneralinformationsection(String actionName){
+        activateEachService.performActionOnBiodiversityGeneralInformation(actionName);
+    }
+
+    @And("update the fields with below data")
+    public void updatethefieldswithrequireddata(DataTable fieldData) throws InterruptedException {
+        List<List<String>> data = fieldData.asLists();
+        activateEachService.addCroppingDetailsForBiodiversity(data.get(0).get(0), data.get(0).get(1));
+        activateEachService.addCroppingDetailsForBiodiversity(data.get(1).get(0), data.get(1).get(1));
+        activateEachService.addCroppingDetailsForBiodiversity(data.get(2).get(0), data.get(2).get(1));
+    }
+
+    @Then("no rows are displayed in general information")
+    public void norowsaredisplayedingeneralinformation(){
+        activateEachService.verifyNowRorsAreDisplayed();
     }
 
 

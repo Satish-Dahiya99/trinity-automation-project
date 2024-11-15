@@ -138,6 +138,7 @@ public class FarmSetup extends BasePage {
         WebElement successfullMsg = prepareWebElementWithDynamicXpath(successMessage, message);
         TestUtil.waitForElementVisible(driver, successfullMsg, Duration.of(10, ChronoUnit.SECONDS) );
         Assert.assertTrue(successfullMsg.isDisplayed());
+        TestUtil.waitForElementToDisappear(driver, successfullMsg, Duration.of(10, ChronoUnit.SECONDS));
     }
 
     public void clickEditButton(String farmName) throws InterruptedException {

@@ -29,7 +29,7 @@ Feature: BioDiversity
     Then delete the report "AAA123"
     And verify report "AAA123" is deleted
 
-  @Test1
+  @Test
   Scenario: Verify Historic performance comparison dropdown
 
     Given User logins to the application

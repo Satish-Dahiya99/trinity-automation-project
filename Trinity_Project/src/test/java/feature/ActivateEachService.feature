@@ -6,9 +6,11 @@ Feature: Activate service application
     Given User logins to the application
     When user clicks on sandy setup
     Then user navigates to activate each service
-    And click on carbon manage data
-    Then click on Manage data for cropping
-    And Select filter with data to add crop
+    And click manage data button for "Carbon"
+    Then click manage data button for "Cropping Data"
+    #And click on carbon manage data
+    #Then click on Manage data for cropping
+    And Select filter with data
     |filter        | data       |
     |Select farms  | Grapes     |
     |Select field  | GP1        |
@@ -49,10 +51,10 @@ Feature: Activate service application
     Given User logins to the application
     When user clicks on sandy setup
     Then user navigates to activate each service
-    And click on carbon manage data
-    Then click on Manage data for cropping
+    And click manage data button for "Carbon"
+    Then click manage data button for "Cropping Data"
     #And remove data "2025" for pre-selected filter
-    And Select filter with data to add crop
+    And Select filter with data
       |filter        | data       |
       |Select farms  | Grapes     |
       |Select field  | GP1        |
@@ -98,6 +100,66 @@ Feature: Activate service application
     Then click on button "Select All"
     Then click on button "Delete selected"
     And user clicks on "Yes" delete button
+
+
+  @Test1
+  Scenario: Add new single biodiversity crop[ed area, edit and delete
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Biodiversity"
+    Then click manage data button for "Cropped area"
+    And click on add records button
+    Then enter cropped area details to calculate the impact of productive land
+      |field             | data           |
+      |Select year       | 2024           |
+      |Select farm       | Grapes |
+      |Select field      | GP2            |
+      |Crop name         | Alsike Clover  |
+      |Crop variety      | Aurora         |
+      |Working area (ha) | 5              |
+    And click on button "Save"
+    And verify the success message as "Data added successfully!"
+    And Select filter with data for biodiversity
+      |filter           | data           |
+      |Select years     | 2024           |
+      |Select farms     | Grapes |
+      |Select fields    | GP2            |
+      |Select crops     | Alsike Clover  |
+    Then verify "Farm name" as "Grapes" is displayed in general information
+    Then verify below Crop name and crop variety and working area are displayed
+      |Crop name         | Alsike Clover |
+      |Crop variety      | Aurora        |
+      |Working area (ha) | 5              |
+    And "Edit" the data on general information section
+    Then update the fields with below data
+      |Crop name         | Amateur Veg Asparagus  |
+      |Crop variety      | Connovers Colossal     |
+      |Working area (ha) | 10                     |
+    And click on button "Save"
+    And verify the success message as "Data edited successfully!"
+    Then verify below Crop name and crop variety and working area are displayed
+      |Crop name         | Amateur Veg Asparagus  |
+      |Crop variety      | Connovers Colossal     |
+      |Working area (ha) | 10                     |
+    And "Delete" the data on general information section
+    Then click on button "Delete record"
+    Then no rows are displayed in general information
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
