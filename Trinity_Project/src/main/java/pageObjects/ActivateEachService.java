@@ -49,11 +49,26 @@ public class ActivateEachService extends BasePage{
     @FindBy(xpath = "//div[text()='Biodiversity']/..//button")
     WebElement biodiversityManageData;
 
-    @FindBy(xpath = "(//div[text()='Crop variety']/ancestor::div[contains(@class,'MuiDataGrid-main')]//div[@role='rowgroup'])[2]/div[2]//div/div")
+    @FindBy(xpath = "//div[@data-id=1]//div[@title]")
     List<WebElement> bioDiversityCropNameGenInfo;
 
     @FindBy(xpath = "//div[@role='presentation']//div[text()='No rows']")
     WebElement noRows;
+
+    @FindBy(css = "button#demo-customized-button")
+    WebElement bulkEditButton;
+
+    @FindBy(xpath = "//div[text()='Value']")
+    WebElement valueText;
+
+    @FindBy(xpath = "(//div[@class='filter-records']//input[@type='checkbox'])[1]")
+    WebElement selectAllCheckboxforField;
+
+    @FindBy(xpath = "//div[@data-id=2]//div[@title]")
+    List<WebElement> replicatedData;
+
+    @FindBy(xpath = "//div[contains(@data-id,'auto-generated-row-basicInfo')]//input/..")
+    WebElement generalInfoSelectAllCheckbox;
 
 
     String manageDataButton = "//div[text()='"+dynamicText+"']/..//button";
@@ -69,6 +84,8 @@ public class ActivateEachService extends BasePage{
     String filterButton = "//div[text()='"+dynamicText+"']/..//div[@data-value]";
     String bioDiversityGeneralInfo = "//div[contains(@class,'MuiBox-root')]//p[text()='"+dynamicText+"']/following-sibling::p";
     String biodiversityActionButton = "//div[@data-field='actions']//*[contains(@data-testid,'"+dynamicText+"')]";
+    String button = "//*[text()='"+dynamicText+"']";
+    //String generalInfoData = "//div[@data-id="+dynamicText+"]//div[@title]";
 
 
 
@@ -245,18 +262,20 @@ public class ActivateEachService extends BasePage{
         Assert.assertTrue(data.equalsIgnoreCase(ele.getText()));
     }
 
-    public boolean verifyCropNameVarietyAndWorkingArea(String value){
+    public boolean verifyCropNameVarietyAndWorkingAreaInFirstRow(String value){
 
-        for (WebElement ele : bioDiversityCropNameGenInfo){
-            if (ele.getText().equalsIgnoreCase(value)){
-                return true;
+            for (WebElement ele : bioDiversityCropNameGenInfo){
+                System.out.println(ele.getText()+"first row *******");
+                if (ele.getText().equalsIgnoreCase(value)){
+
+                    return true;
+                }
             }
-        }
-        return false;
+            return false;
     }
 
-    public void verifyValueOfCropNameVarietyAndWorkingArea(String data){
-        Assert.assertTrue(verifyCropNameVarietyAndWorkingArea(data));
+    public void verifyValueOfCropNameVarietyAndWorkingAreaInFirstRow(String data){
+        Assert.assertTrue(verifyCropNameVarietyAndWorkingAreaInFirstRow(data), data+" is not displayed");
     }
 
     public void performActionOnBiodiversityGeneralInformation(String actionName){
@@ -267,6 +286,71 @@ public class ActivateEachService extends BasePage{
     public void verifyNowRorsAreDisplayed(){
         Assert.assertTrue(noRows.isDisplayed());
     }
+
+    public void clickBulkEditButton(){
+        javaScriptExecutorClick(bulkEditButton);
+    }
+
+    public void selectFilterOnReplicateRecordsPage(String filter, String data) throws InterruptedException {
+
+        try{
+
+            WebElement input = prepareWebElementWithDynamicXpath(filterInput, filter);
+            TestUtil.staticWait(3000);
+            input.sendKeys(data);
+            input.sendKeys(Keys.RETURN);
+            TestUtil.staticWait(1000);
+        }catch (Exception e){
+
+            WebElement input1 = prepareWebElementWithDynamicXpath(filterInput, filter);
+            input1.click();
+            javaScriptToEnterText(input1, data);
+            input1.sendKeys(Keys.RETURN);
+            TestUtil.staticWait(1000);
+        }
+
+        valueText.click();
+
+    }
+
+    public void setSelectAllCheckboxforFieldOnReplicatePage(){
+        selectAllCheckboxforField.click();
+    }
+
+    public void clickOnButton(String buttonName){
+        WebElement ele = prepareWebElementWithDynamicXpath(button, buttonName);
+        TestUtil.waitForElementClickable(driver, ele, Duration.of(10, ChronoUnit.SECONDS));
+        ele.click();
+    }
+
+//    public void verifyReplicatedData(String data){
+//        Assert.assertTrue(replicatedData.getText().equalsIgnoreCase(data), data+" is not displayed");
+//    }
+
+    public void clickGeneralInformationSelectAllCheckBox() throws InterruptedException {
+        TestUtil.waitForElementClickable(driver, generalInfoSelectAllCheckbox, Duration.of(10, ChronoUnit.SECONDS));
+        scrollToElement(generalInfoSelectAllCheckbox);
+        TestUtil.staticWait(5000);
+        javaScriptExecutorClick(generalInfoSelectAllCheckbox);
+        //generalInfoSelectAllCheckbox.click();
+    }
+
+    public boolean verifyCropNameVarietyAndWorkingAreaInSecondRow(String value){
+
+        for (WebElement ele : replicatedData){
+            System.out.println(ele.getText()+" second row *******");
+            if (ele.getText().equalsIgnoreCase(value)){
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void verifyValueOfCropNameVarietyAndWorkingAreaInSecondRow(String data){
+        Assert.assertTrue(verifyCropNameVarietyAndWorkingAreaInSecondRow(data), data+" is not displayed");
+    }
+
 
 
 

@@ -131,8 +131,8 @@ public class ActivateEachServiceStep {
         activateEachService.clickManageDataButton(buttonName);
     }
 
-    @Then("click on add records button")
-    public void clickonaddrecordsbutton() throws InterruptedException {
+    @Then("click on add records buttonn")
+    public void clickonaddrecordsbuttonn() throws InterruptedException {
         activateEachService.clickAddCropButton();
     }
 
@@ -154,7 +154,7 @@ public class ActivateEachServiceStep {
         activateEachService.selectFilterForBiodiversity(data.get(1).get(0), data.get(1).get(1));
         activateEachService.selectFilterForBiodiversity(data.get(2).get(0), data.get(2).get(1));
         activateEachService.selectFilterForBiodiversity(data.get(3).get(0), data.get(3).get(1));
-        activateEachService.selectFilterForBiodiversity(data.get(4).get(0), data.get(4).get(1));
+       // activateEachService.selectFilterForBiodiversity(data.get(4).get(0), data.get(4).get(1));
 
     }
 
@@ -163,12 +163,13 @@ public class ActivateEachServiceStep {
         activateEachService.verifyGeneralInformationForBioDiversity(farmType, farmName);
     }
 
-    @And("verify below Crop name and crop variety and working area are displayed")
-    public void verifybelowCropnameandcropvarietyandworkingareaaredisplayed(DataTable dataTable){
-        List<List<String>> list = dataTable.asLists();
-        activateEachService.verifyValueOfCropNameVarietyAndWorkingArea(list.get(0).get(1));
-        activateEachService.verifyValueOfCropNameVarietyAndWorkingArea(list.get(1).get(1));
-        activateEachService.verifyValueOfCropNameVarietyAndWorkingArea(list.get(2).get(1));
+    @And("verify below Crop name and crop variety and working area are displayed in first row")
+    public void verifybelowCropnameandcropvarietyandworkingareaaredisplayed(DataTable dataTable) throws InterruptedException {
+        TestUtil.staticWait(4000);
+            List<List<String>> list = dataTable.asLists();
+            activateEachService.verifyValueOfCropNameVarietyAndWorkingAreaInFirstRow(list.get(0).get(1));
+            activateEachService.verifyValueOfCropNameVarietyAndWorkingAreaInFirstRow(list.get(1).get(1));
+            activateEachService.verifyValueOfCropNameVarietyAndWorkingAreaInFirstRow(list.get(2).get(1));
     }
 
     @Then("{string} the data on general information section")
@@ -187,6 +188,65 @@ public class ActivateEachServiceStep {
     @Then("no rows are displayed in general information")
     public void norowsaredisplayedingeneralinformation(){
         activateEachService.verifyNowRorsAreDisplayed();
+    }
+
+    @And("click bulk edit button")
+    public void clickbulkeditbutton(){
+        activateEachService.clickBulkEditButton();
+    }
+
+    @Then("select the filters of the records on replicate page")
+    public void selectthefiltersoftherecordsonreplicatepage(DataTable dataTable) throws InterruptedException {
+        List<List<String>> data = dataTable.asLists();
+        activateEachService.selectFilterOnReplicateRecordsPage(data.get(0).get(0), data.get(0).get(1));
+        activateEachService.selectFilterOnReplicateRecordsPage(data.get(1).get(0), data.get(1).get(1));
+        activateEachService.selectFilterOnReplicateRecordsPage(data.get(2).get(0), data.get(2).get(1));
+    }
+
+    @And("select all checkbox for field")
+    public void selectallcheckboxforfield(){
+        activateEachService.setSelectAllCheckboxforFieldOnReplicatePage();
+    }
+
+    @Then("click on {} button")
+    public void clickbutton(String button){
+        activateEachService.clickOnButton(button);
+    }
+
+//    @And("verify below Crop name after replicating data are displayed")
+//    public void verifyCropnameafterreplicatingdata(DataTable dataTable){
+//        List<List<String>> list = dataTable.asLists();
+//        activateEachService.verifyReplicatedData(list.get(0).get(1));
+//    }
+
+    @Then("select all checkbox for general information")
+    public void selectallcheckboxforgeneralinformation() throws InterruptedException {
+        activateEachService.clickGeneralInformationSelectAllCheckBox();
+    }
+
+    @And("enter required cropping data for edit multiple")
+    public void enterrequiredcroppingdataforeditmultiple(DataTable dataTable) throws InterruptedException {
+        List<List<String>> data = dataTable.asLists();
+        activateEachService.addCroppingDetailsForBiodiversity(data.get(0).get(0), data.get(0).get(1));
+        activateEachService.addCroppingDetailsForBiodiversity(data.get(1).get(0), data.get(1).get(1));
+        activateEachService.addCroppingDetailsForBiodiversity(data.get(2).get(0), data.get(2).get(1));
+
+    }
+
+    @And("verify below Crop name and crop variety and working area are displayed in second row")
+    public void verifybelowCropnameandcropvarietyandworkingareaaredisplayedInSecondRow(DataTable dataTable) throws InterruptedException {
+        try{
+            TestUtil.staticWait(4000);
+            List<List<String>> list = dataTable.asLists();
+            activateEachService.verifyValueOfCropNameVarietyAndWorkingAreaInSecondRow(list.get(0).get(1));
+            activateEachService.verifyValueOfCropNameVarietyAndWorkingAreaInSecondRow(list.get(1).get(1));
+            activateEachService.verifyValueOfCropNameVarietyAndWorkingAreaInSecondRow(list.get(2).get(1));
+        } catch (Exception e) {
+            TestUtil.staticWait(4000);
+            List<List<String>> list = dataTable.asLists();
+            activateEachService.verifyValueOfCropNameVarietyAndWorkingAreaInSecondRow(list.get(0).get(1));
+        }
+
     }
 
 

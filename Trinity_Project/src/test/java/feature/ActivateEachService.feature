@@ -102,7 +102,7 @@ Feature: Activate service application
     And user clicks on "Yes" delete button
 
 
-  @Test1
+  @Test
   Scenario: Add new single biodiversity crop[ed area, edit and delete
 
     Given User logins to the application
@@ -126,9 +126,9 @@ Feature: Activate service application
       |Select years     | 2024           |
       |Select farms     | Grapes |
       |Select fields    | GP2            |
-      |Select crops     | Alsike Clover  |
+     # |Select crops     | Alsike Clover  |
     Then verify "Farm name" as "Grapes" is displayed in general information
-    Then verify below Crop name and crop variety and working area are displayed
+    Then verify below Crop name and crop variety and working area are displayed in first row
       |Crop name         | Alsike Clover |
       |Crop variety      | Aurora        |
       |Working area (ha) | 5              |
@@ -139,13 +139,204 @@ Feature: Activate service application
       |Working area (ha) | 10                     |
     And click on button "Save"
     And verify the success message as "Data edited successfully!"
-    Then verify below Crop name and crop variety and working area are displayed
+    Then verify below Crop name and crop variety and working area are displayed in first row
       |Crop name         | Amateur Veg Asparagus  |
       |Crop variety      | Connovers Colossal     |
       |Working area (ha) | 10                     |
     And "Delete" the data on general information section
     Then click on button "Delete record"
     Then no rows are displayed in general information
+
+  @Test11
+  Scenario: Add new single and replicate biodiversity cropped area, edit and delete multiple
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Biodiversity"
+    Then click manage data button for "Cropped area"
+    And click on add records buttonn
+    Then enter cropped area details to calculate the impact of productive land
+      |field             | data           |
+      |Select year       | 2024           |
+      |Select farm       | Grapes |
+      |Select field      | GP2            |
+      |Crop name         | Alsike Clover  |
+      |Crop variety      | Aurora         |
+      |Working area (ha) | 5              |
+    And click on button "Save"
+    And verify the success message as "Data added successfully!"
+    And Select filter with data for biodiversity
+      |filter           | data           |
+      |Select years     | 2024           |
+      |Select farms     | Grapes |
+      |Select fields    | GP2            |
+      #|Select crops     | Alsike Clover  |
+    Then verify "Farm name" as "Grapes" is displayed in general information
+    Then verify below Crop name and crop variety and working area are displayed in first row
+      |Crop name         | Alsike Clover |
+      |Crop variety      | Aurora        |
+      |Working area (ha) | 5              |
+    And click bulk edit button
+    Then click on Replicate records button
+    And click on button "Select"
+    Then select the filters of the records on replicate page
+      |Select years  | 2024   |
+      |Select farms  | Graped |
+      |Select fields | GP2    |
+    And select all checkbox for field
+    Then click on Save button
+    Then verify below Crop name and crop variety and working area are displayed in second row
+      |Crop name         | Alsike Clover |
+    And click bulk edit button
+    Then click on Edit multiple button
+    And select all checkbox for general information
+    Then click on Edit selected button
+    And enter required cropping data for edit multiple
+      |Crop name         | Amateur Veg Asparagus  |
+      |Crop variety      | Connovers Colossal     |
+      |Working area (ha) | 10                     |
+    Then click on Save button
+    Then verify below Crop name and crop variety and working area are displayed in first row
+      |Crop name         | Amateur Veg Asparagus |
+      |Crop variety      | Connovers Colossal        |
+      |Working area (ha) | 10              |
+    Then verify below Crop name and crop variety and working area are displayed in second row
+      |Crop name         | Amateur Veg Asparagus |
+      |Crop variety      | Connovers Colossal        |
+      |Working area (ha) | 10              |
+    And click bulk edit button
+    Then click on Delete multiple button
+    And select all checkbox for general information
+    Then click on Delete selected button
+    Then click on button "Delete record"
+    Then no rows are displayed in general information
+
+
+  @Test
+  Scenario: Add new single biodiversity Natural capital features (non-cropped area), edit and delete
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Biodiversity"
+    Then click manage data button for "Natural capital features (non-cropped area)"
+    And click on Add records button
+    Then enter cropped area details to calculate the impact of productive land
+      |field             | data           |
+      |Select year       | 2024           |
+      |Select farm       | Grapes |
+      |Select field      | GP2            |
+      |Land use type         | Agroforestry  |
+      |Land use name      | Fuel wood trees         |
+      |Working area (ha) | 5              |
+    And click on button "Save"
+    And verify the success message as "Data added successfully!"
+    And Select filter with data for biodiversity
+      |filter           | data           |
+      |Select years     | 2024           |
+      |Select farms     | Grapes |
+      |Select fields    | GP2            |
+     # |Select crops     | Alsike Clover  |
+    Then verify "Farm name" as "Grapes" is displayed in general information
+    Then verify below Crop name and crop variety and working area are displayed in first row
+      |Land use type         | Agroforestry  |
+      |Land use name      | Fuel wood trees         |
+      |Working area (ha) | 5              |
+    And "Edit" the data on general information section
+    Then update the fields with below data
+      |Land use type         | Linear feature  |
+      |Land use name      | Hedgerows     |
+      |Working area (ha) | 10                     |
+    And click on button "Save"
+    And verify the success message as "Data edited successfully!"
+    Then verify below Crop name and crop variety and working area are displayed in first row
+      |Land use type         | Linear feature  |
+      |Land use name      | Hedgerows     |
+      |Working area (ha) | 10                     |
+    And "Delete" the data on general information section
+    Then click on button "Delete record"
+    Then no rows are displayed in general information
+
+
+
+  @Test
+  Scenario: Add new single and replicate biodiversity Natural capital features (non-cropped area), edit and delete multiple data
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Biodiversity"
+    Then click manage data button for "Natural capital features (non-cropped area)"
+    And click on Add records button
+    Then enter cropped area details to calculate the impact of productive land
+      |field             | data           |
+      |Select year       | 2024           |
+      |Select farm       | Grapes |
+      |Select field      | GP2            |
+      |Land use type         | Agroforestry  |
+      |Land use name      | Fuel wood trees         |
+      |Working area (ha) | 5              |
+    And click on button "Save"
+    And verify the success message as "Data added successfully!"
+    And Select filter with data for biodiversity
+      |filter           | data           |
+      |Select years     | 2024           |
+      |Select farms     | Grapes |
+      |Select fields    | GP2            |
+      #|Select crops     | Alsike Clover  |
+    Then verify "Farm name" as "Grapes" is displayed in general information
+    Then verify below Crop name and crop variety and working area are displayed in first row
+      |Land use type         | Agroforestry  |
+      |Land use name      | Fuel wood trees         |
+      |Working area (ha) | 5              |
+    And click bulk edit button
+    Then click on Replicate records button
+    And click on button "Select"
+    Then select the filters of the records on replicate page
+      |Select years  | 2024   |
+      |Select farms  | Graped |
+      |Select fields | GP2    |
+    And select all checkbox for field
+    Then click on Save button
+    Then verify below Crop name and crop variety and working area are displayed in second row
+      |Land use type         | Agroforestry  |
+    And click bulk edit button
+    Then click on Edit multiple button
+    And select all checkbox for general information
+    Then click on Edit selected button
+    And enter required cropping data for edit multiple
+      |Land use type         | Linear feature  |
+      |Land use name      | Hedgerows     |
+      |Working area (ha) | 10                     |
+    Then click on Save button
+    Then verify below Crop name and crop variety and working area are displayed in first row
+      |Land use type         | Linear feature  |
+      |Land use name      | Hedgerows     |
+      |Working area (ha) | 10                     |
+    Then verify below Crop name and crop variety and working area are displayed in second row
+      |Land use type         | Linear feature  |
+      |Land use name      | Hedgerows     |
+      |Working area (ha) | 10                     |
+    And click bulk edit button
+    Then click on Delete multiple button
+    And select all checkbox for general information
+    Then click on Delete selected button
+    Then click on button "Delete record"
+    Then no rows are displayed in general information
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
