@@ -147,7 +147,7 @@ Feature: Activate service application
     Then click on button "Delete record"
     Then no rows are displayed in general information
 
-  @Test11
+  @Test
   Scenario: Add new single and replicate biodiversity cropped area, edit and delete multiple
 
     Given User logins to the application
@@ -272,10 +272,10 @@ Feature: Activate service application
     Then enter cropped area details to calculate the impact of productive land
       |field             | data           |
       |Select year       | 2024           |
-      |Select farm       | Grapes |
+      |Select farm       | Grapes         |
       |Select field      | GP2            |
-      |Land use type         | Agroforestry  |
-      |Land use name      | Fuel wood trees         |
+      |Land use type     | Agroforestry   |
+      |Land use name     | Fuel wood trees         |
       |Working area (ha) | 5              |
     And click on button "Save"
     And verify the success message as "Data added successfully!"
@@ -324,6 +324,37 @@ Feature: Activate service application
     Then click on Delete selected button
     Then click on button "Delete record"
     Then no rows are displayed in general information
+
+
+  @Test11
+  Scenario: Add new single biodiversity Natural capital features (non-cropped area), edit and delete
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Biodiversity"
+    Then click manage data button for "Management practices"
+    And Select filter with data for Management practices
+      |Select farm     | Grapes        |
+      |Select field    | GP2           |
+      |Select land use | Alsike Clover |
+    Then click management practice "Apply to" action button
+    And select Apply to filter
+      |Select farm   | Grapes |
+      |Select field  | GP2    |
+      |Select year   | 2023   |
+    Then click on 2023 button
+    And click on SELECT ALL button
+    Then click on Apply button
+    And verify the success message as "2 out of 2 records saved successfully."
+
+
+
+
+
+
+
+
 
 
 

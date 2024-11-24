@@ -85,7 +85,7 @@ public class ActivateEachService extends BasePage{
     String bioDiversityGeneralInfo = "//div[contains(@class,'MuiBox-root')]//p[text()='"+dynamicText+"']/following-sibling::p";
     String biodiversityActionButton = "//div[@data-field='actions']//*[contains(@data-testid,'"+dynamicText+"')]";
     String button = "//*[text()='"+dynamicText+"']";
-    //String generalInfoData = "//div[@data-id="+dynamicText+"]//div[@title]";
+    String managementPractActionButtons = "//div[contains(@class,'actionButtons')]//*[text()='"+dynamicText+"']";
 
 
 
@@ -349,6 +349,22 @@ public class ActivateEachService extends BasePage{
 
     public void verifyValueOfCropNameVarietyAndWorkingAreaInSecondRow(String data){
         Assert.assertTrue(verifyCropNameVarietyAndWorkingAreaInSecondRow(data), data+" is not displayed");
+    }
+
+    public void clickOnManagementPracticeActionButton(String buttonName){
+        try{
+            WebElement ele = prepareWebElementWithDynamicXpath(managementPractActionButtons, buttonName);
+            TestUtil.waitForElementClickable(driver, ele, Duration.of(10, ChronoUnit.SECONDS));
+            scrollToElement(ele);
+            ele.click();
+        } catch (Exception e) {
+            WebElement ele1 = prepareWebElementWithDynamicXpath(managementPractActionButtons, buttonName);
+            TestUtil.waitForElementClickable(driver, ele1, Duration.of(10, ChronoUnit.SECONDS));
+            scrollToElement(ele1);
+            ele1.click();
+        }
+
+
     }
 
 

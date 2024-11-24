@@ -213,12 +213,6 @@ public class ActivateEachServiceStep {
         activateEachService.clickOnButton(button);
     }
 
-//    @And("verify below Crop name after replicating data are displayed")
-//    public void verifyCropnameafterreplicatingdata(DataTable dataTable){
-//        List<List<String>> list = dataTable.asLists();
-//        activateEachService.verifyReplicatedData(list.get(0).get(1));
-//    }
-
     @Then("select all checkbox for general information")
     public void selectallcheckboxforgeneralinformation() throws InterruptedException {
         activateEachService.clickGeneralInformationSelectAllCheckBox();
@@ -246,6 +240,29 @@ public class ActivateEachServiceStep {
             List<List<String>> list = dataTable.asLists();
             activateEachService.verifyValueOfCropNameVarietyAndWorkingAreaInSecondRow(list.get(0).get(1));
         }
+
+    }
+
+    @Then("Select filter with data for Management practices")
+    public void SelectfilterwithdataforManagementPractices(DataTable filterData) throws InterruptedException {
+        List<List<String>> data = filterData.asLists();
+        TestUtil.staticWait(5000);
+        activateEachService.selectFilterForBiodiversity(data.get(0).get(0), data.get(0).get(1));
+        activateEachService.selectFilterForBiodiversity(data.get(1).get(0), data.get(1).get(1));
+        activateEachService.selectFilterForBiodiversity(data.get(2).get(0), data.get(2).get(1));
+    }
+
+    @And("click management practice {string} action button")
+    public void clickmanagementpracticeactionbutton(String buttonName){
+        activateEachService.clickOnManagementPracticeActionButton(buttonName);
+    }
+
+    @Then("select Apply to filter")
+    public void selectApplytofilter(DataTable dataTable) throws InterruptedException {
+        List<List<String>> data = dataTable.asLists();
+        activateEachService.addFilterDataForBiodiversity(data.get(0).get(0), data.get(0).get(1));
+        activateEachService.addFilterDataForBiodiversity(data.get(1).get(0), data.get(1).get(1));
+        activateEachService.addFilterDataForBiodiversity(data.get(2).get(0), data.get(2).get(1));
 
     }
 
