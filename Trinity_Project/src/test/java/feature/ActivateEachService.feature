@@ -8,15 +8,13 @@ Feature: Activate service application
     Then user navigates to activate each service
     And click manage data button for "Carbon"
     Then click manage data button for "Cropping Data"
-    #And click on carbon manage data
-    #Then click on Manage data for cropping
     And Select filter with data
     |filter        | data       |
     |Select farms  | Grapes     |
     |Select field  | GP1        |
     |Select years  | 2024       |
     |remove data   | 2025       |
-    Then click on add crop button
+    Then click on add crop buttonn
     And add required data for crop
     |field          | data           |
     |Crop type      | Main crop      |
@@ -326,7 +324,7 @@ Feature: Activate service application
     Then no rows are displayed in general information
 
 
-  @Test11
+  @Test
   Scenario: Add new single biodiversity Natural capital features (non-cropped area), edit and delete
 
     Given User logins to the application

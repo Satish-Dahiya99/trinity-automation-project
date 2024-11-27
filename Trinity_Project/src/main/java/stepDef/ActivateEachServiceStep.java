@@ -52,7 +52,7 @@ public class ActivateEachServiceStep {
         activateEachService.removeFilter(filterData);
     }
 
-    @Then("click on add crop button")
+    @Then("click on add crop buttonn")
     public void clickonaddcropbutton() throws InterruptedException {
         activateEachService.clickAddCropButton();
     }

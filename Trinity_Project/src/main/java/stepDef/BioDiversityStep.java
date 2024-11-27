@@ -83,7 +83,7 @@ public class BioDiversityStep {
         bioDiversity.captureTheValueOfBiodiversityPerfFilters();
     }
 
-    @And("click on improve biodiversity score button")
+    @And("click on improve biodiversity score buttonn")
     public void clickonimprovebiodiversityscorebutton(){
         bioDiversity.clickImproveScoreButton();
     }

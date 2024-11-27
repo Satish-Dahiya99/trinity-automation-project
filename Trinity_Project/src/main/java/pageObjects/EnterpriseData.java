@@ -26,6 +26,9 @@ public class EnterpriseData extends BasePage{
     @FindBy(xpath = "(//div[@id='commonTable']//button)[2]")
     WebElement editMultiple;
 
+    @FindBy(xpath = "//*[contains(@class,'MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-oooamk')]")
+    WebElement loader;
+
 
 
     String manageDataButton = "//div[text()='"+dynamicText+"']/..//button";
@@ -90,8 +93,16 @@ public class EnterpriseData extends BasePage{
     }
 
     public void deleteTheField(String fieldName) throws InterruptedException {
-        TestUtil.staticWait(8000);
-        driver.findElement(By.xpath("//*[@data-testid='DeleteOutlineIcon']")).click();
+        try{
+            TestUtil.staticWait(8000);
+            driver.findElement(By.xpath("//*[@data-testid='DeleteOutlineIcon']")).click();
+        } catch (Exception e) {
+            TestUtil.waitForElementToDisappear(driver, loader, Duration.of(20, ChronoUnit.SECONDS));
+            TestUtil.staticWait(4000);
+            WebElement ele = driver.findElement(By.xpath("//*[@data-testid='DeleteOutlineIcon']"));
+            ele.click();
+        }
+
 
     }
 

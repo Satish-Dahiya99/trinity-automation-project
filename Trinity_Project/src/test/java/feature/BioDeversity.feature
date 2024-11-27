@@ -61,7 +61,8 @@ Feature: BioDiversity
     When user clicks on biodiversity
     Then user navigates to "Dashboard"
     And capture the values of biodiversity performance filters
-    And click on improve biodiversity score button
+    #And click on Improve biodiversity score button
+    And click on improve biodiversity score buttonn
     Then verify recommendations filters  is same as Biodiversity performance filters
 
   @Test
@@ -81,7 +82,7 @@ Feature: BioDiversity
     Given User logins to the application
     When user clicks on biodiversity
     Then user navigates to "Dashboard"
-    And click on improve biodiversity score button
+    And click on improve biodiversity score buttonn
     Then expand on "No insecticide" management practices
     And uncheck all the field names for "No insecticide" management practices
     Then click "Review Impact" banner button
