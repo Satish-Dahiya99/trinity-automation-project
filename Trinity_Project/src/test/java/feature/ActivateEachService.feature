@@ -58,7 +58,7 @@ Feature: Activate service application
       |Select field  | GP1        |
       |Select years  | 2024       |
       |remove data   | 2025       |
-    Then click on add crop button
+    Then click on + Add crop button
     And add required data for crop
       |field          | data           |
       |Crop type      | Main crop      |
@@ -92,7 +92,7 @@ Feature: Activate service application
       |field          | data           |
       |Tillage method | Full           |
     And user "Save" the added data
-    And verify the success message as "1 out of 1 selected records were updated."
+    And verify the success message as "2 out of 2 selected records were updated."
     And verify tillage type as "Full" is displayed
     Then click on button "Delete multiple"
     Then click on button "Select All"

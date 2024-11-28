@@ -209,9 +209,17 @@ public class ActivateEachService extends BasePage{
     }
 
     public void clickManageDataButton(String buttonname){
-        WebElement ele = prepareWebElementWithDynamicXpath(manageDataButton, buttonname);
-        TestUtil.waitForElementClickable(driver, ele, Duration.of(10, ChronoUnit.SECONDS));
-        ele.click();
+        try{
+            WebElement ele = prepareWebElementWithDynamicXpath(manageDataButton, buttonname);
+            TestUtil.waitForElementClickable(driver, ele, Duration.of(10, ChronoUnit.SECONDS));
+            scrollToElement(ele);
+            ele.click();
+        } catch (Exception e) {
+            WebElement ele = prepareWebElementWithDynamicXpath(manageDataButton, buttonname);
+            TestUtil.waitForElementClickable(driver, ele, Duration.of(10, ChronoUnit.SECONDS));
+            javaScriptExecutorClick(ele);
+        }
+
     }
 
     public void addFilterDataForBiodiversity(String field, String data) throws InterruptedException {

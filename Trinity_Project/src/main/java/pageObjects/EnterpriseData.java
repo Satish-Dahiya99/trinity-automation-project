@@ -114,7 +114,8 @@ public class EnterpriseData extends BasePage{
             javaScriptExecutorClick(ele);
         } catch (Exception e) {
             TestUtil.staticWait(4000);
-            ele.click();
+            WebElement ele1 = prepareWebElementWithDynamicXpath(button, buttonName);
+            ele1.click();
         }
     }
 }
