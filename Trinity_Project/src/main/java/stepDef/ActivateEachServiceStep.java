@@ -40,11 +40,12 @@ public class ActivateEachServiceStep {
 
     @And("Select filter with data")
     public void Selectfilterwithdatatoaddcrop(DataTable filterData) throws InterruptedException {
-        List<List<String>> data = filterData.asLists();
-        activateEachService.selectFilter(data.get(1).get(0), data.get(1).get(1));
-        activateEachService.selectFilter(data.get(2).get(0), data.get(2).get(1));
-        activateEachService.removeFilter(data.get(4).get(1));
-        activateEachService.selectFilter(data.get(3).get(0), data.get(3).get(1));
+            List<List<String>> data = filterData.asLists();
+            activateEachService.selectFilter(data.get(1).get(0), data.get(1).get(1));
+            activateEachService.selectFilter(data.get(2).get(0), data.get(2).get(1));
+            activateEachService.removeFilter(data.get(4).get(1));
+            activateEachService.selectFilter(data.get(3).get(0), data.get(3).get(1));
+
     }
 
     @And("remove data {string} for pre-selected filter")
@@ -209,7 +210,7 @@ public class ActivateEachServiceStep {
     }
 
     @Then("click on {} button")
-    public void clickbutton(String button){
+    public void clickbutton(String button) throws InterruptedException {
         activateEachService.clickOnButton(button);
     }
 
@@ -264,6 +265,65 @@ public class ActivateEachServiceStep {
         activateEachService.addFilterDataForBiodiversity(data.get(1).get(0), data.get(1).get(1));
         activateEachService.addFilterDataForBiodiversity(data.get(2).get(0), data.get(2).get(1));
 
+    }
+
+    @And("Select filter with data for Operational data")
+    public void SelectfilterwithdatatoaddcropForOperationalData(DataTable filterData) throws InterruptedException {
+        List<List<String>> data = filterData.asLists();
+        activateEachService.selectFilterForOperationalData(data.get(1).get(0), data.get(1).get(1));
+        activateEachService.selectFilterForOperationalData(data.get(2).get(0), data.get(2).get(1));
+
+    }
+
+    @Then("select operational data year as {string}")
+    public void selectoperationaldatayear(String year){
+        activateEachService.clickOperationalDataYear(year);
+    }
+
+    @And("add required field for Operational Data")
+    public void addrequiredfieldforOperationalData(DataTable selectData) throws InterruptedException {
+        List<List<String>> data = selectData.asLists();
+        activateEachService.selectRequiredDataToAddCrop(data.get(1).get(0), data.get(1).get(1));
+        activateEachService.selectRequiredDataToAddCrop(data.get(2).get(0), data.get(2).get(1));
+        activateEachService.selectRequiredDataToAddCrop(data.get(3).get(0), data.get(3).get(1));
+        activateEachService.selectRequiredDataToAddCrop(data.get(4).get(0), data.get(4).get(1));
+        activateEachService.addProductforOperationalFlow(data.get(5).get(1));
+        activateEachService.selectRequiredDataToAddCrop(data.get(6).get(0), data.get(6).get(1));
+        activateEachService.selectRequiredDataToAddCrop(data.get(7).get(0), data.get(7).get(1));
+        activateEachService.setDate(data.get(8).get(0), data.get(8).get(1));
+    }
+
+    @Then("verify the product name displayed as {string}")
+    public void verifyproductnamedisplayed(String prodName){
+        activateEachService.verifyOperationDataProductName(prodName);
+    }
+
+    @And("add product in required data section")
+    public void addproductinrequireddatasection(DataTable dataTable){
+        List<List<String>> list = dataTable.asLists();
+        activateEachService.addProductforOperationalFlow(list.get(0).get(1));
+
+    }
+
+    @And("add required field for Operational Data for Crop level")
+    public void addrequiredfieldforOperationalDataForCropLevel(DataTable selectData) throws InterruptedException {
+        List<List<String>> data = selectData.asLists();
+        activateEachService.selectRequiredDataToAddCrop(data.get(1).get(0), data.get(1).get(1));
+        activateEachService.selectRequiredDataToAddCrop(data.get(2).get(0), data.get(2).get(1));
+        activateEachService.addProductforOperationalFlow(data.get(3).get(1));
+        activateEachService.selectRequiredDataToAddCrop(data.get(4).get(0), data.get(4).get(1));
+        activateEachService.selectRequiredDataToAddCrop(data.get(5).get(0), data.get(5).get(1));
+        activateEachService.setDate(data.get(6).get(0), data.get(6).get(1));
+    }
+
+    @And("select {string} checkbox to replicate records")
+    public void selectcheckboxtoreplicaterecords(String dataField) throws InterruptedException {
+        activateEachService.selectDataToReplicate(dataField);
+    }
+
+    @Then("select first crop to replicate records")
+    public void selectfirstcroptoreplicaterecords(){
+        activateEachService.selectCropYearToReplicateCropLevelData();
     }
 
 

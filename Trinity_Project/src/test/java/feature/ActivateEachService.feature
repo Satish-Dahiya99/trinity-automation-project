@@ -1,7 +1,8 @@
 Feature: Activate service application
 
+  ##################### Sandy setup: Activate Services>> Setup – Carbon >> Cropping Data (Single) ############
   @Test
-  Scenario: Add new crop, Edit and Delete
+  Scenario: Add new crop, Edit and Delete for Cropping data
 
     Given User logins to the application
     When user clicks on sandy setup
@@ -42,9 +43,9 @@ Feature: Activate service application
     Then verify the data "deleted" message
 
 
-
+##################### Sandy setup: Activate Services>> Setup – Carbon >> Cropping Data (Multiple) ############
   @Test
-  Scenario: Add new crop, Replicate Data, Edit multiple, Delete Multiple
+  Scenario: Add new crop, Replicate Data, Edit multiple, Delete Multiple for cropping data
 
     Given User logins to the application
     When user clicks on sandy setup
@@ -100,6 +101,263 @@ Feature: Activate service application
     And user clicks on "Yes" delete button
 
 
+###### Sandy setup: Activate Services>> Setup – Carbon >> Operational Data , Field Level (Single) ############
+  @Test
+  Scenario: Add new crop, Edit and Delete for Operational Data, Field Level
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Carbon"
+    Then click manage data button for "Operational Data"
+    Then click on Field level button
+    And select operational data year as "2024"
+    And Select filter with data for Operational data
+      |filter        | data           |
+      |Select farms  | ####Test_Farmm |
+      |Select field  | Test_Field     |
+    Then click on button "+ Add operations"
+    And add required field for Operational Data
+      |field             | data                 |
+      |Crop name         | Amateur Veg Beetroot |
+      |Variety           | Orange Boy           |
+      |Operation group   | Crop Protection      |
+      |Operation type    | Adjuvants            |
+      |Product name      | Test_Prod            |
+      |Quantity          | 5                    |
+      |Unit              |g/ha                  |
+      |Date              |0                     |
+    And click on button "Save"
+    Then verify the success message as "Data successfully added"
+    And verify the product name displayed as "Test_Prod"
+    Then "Edit" the data on general information section
+    And add product in required data section
+      |Product name      | Test_Prod1            |
+    And click on button "Save"
+    Then verify the success message as "Data successfully updated"
+    And verify the product name displayed as "Test_Prod1"
+    And "Delete" the data on general information section
+    Then click on button "Yes, delete"
+    Then verify the success message as "Data successfully deleted"
+
+
+
+    ### Sandy setup: Activate Services>> Setup – Carbon >> Operational Data, Field Level (Multiple - Replicate Data) ############
+  @Test
+  Scenario: Add new crop, Edit and Delete for Operational Data, Field Level (Replicate - Multiple Data)
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Carbon"
+    Then click manage data button for "Operational Data"
+    Then click on Field level button
+    And select operational data year as "2024"
+    And Select filter with data for Operational data
+      |filter        | data           |
+      |Select farms  | ####Test_Farmm |
+      |Select field  | Test_Field     |
+    Then click on button "+ Add operations"
+    And add required field for Operational Data
+      |field             | data                 |
+      |Crop name         | Amateur Veg Beetroot |
+      |Variety           | Orange Boy           |
+      |Operation group   | Crop Protection      |
+      |Operation type    | Adjuvants            |
+      |Product name      | Test_Prod            |
+      |Quantity          | 5                    |
+      |Unit              |g/ha                  |
+      |Date              |0                     |
+    And click on button "Save"
+    Then verify the success message as "Data successfully added"
+    And verify the product name displayed as "Test_Prod"
+    Then click on button "Replicate records"
+    And click on button "Select"
+    Then click select all button for "Select data to replicate" field on Replicate records page
+    And replicate filters for farm and fields
+      |field         | data           |
+      |Select farms  | ####Test_Farmm |
+      |Select years  | 2024           |
+      |Select crop   | Amateur Veg Beetroot |
+    Then click select all button for "Selected fields:" field on Replicate records page
+    And user "Save" the added data
+    Then user "Ok" the added data
+    Then click on button "Edit multiple"
+    Then click on button "Select All"
+    Then click on button "Edit selected"
+    And add product in required data section
+      |Product name      | Test_Prod1            |
+    And click on button "Save"
+    Then verify the success message as "Data updated successfully"
+    And verify the product name displayed as "Test_Prod1"
+    Then click on button "Delete multiple"
+    Then click on button "Select All"
+    Then click on button "Delete selected"
+    Then click on button "Yes, delete"
+    Then verify the success message as "Data successfully deleted"
+
+    ###### Sandy setup: Activate Services>> Setup – Carbon >> Operational Data , Crop Level (Single) ############
+  @Test
+  Scenario: Add new crop, Edit and Delete for Operational Data, Crop Level
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Carbon"
+    Then click manage data button for "Operational Data"
+    Then click on Crop level button
+    And select operational data year as "2024"
+    And Select filter with data for Operational data
+      |filter        | data                 |
+      |Select farms  | ####Test_Farmm       |
+      |Select crop   | Amateur Veg Beetroot |
+    Then click on button "+ Add operations"
+    And add required field for Operational Data for Crop level
+      |field             | data                 |
+      |Operation group   | Crop Protection      |
+      |Operation type    | Adjuvants            |
+      |Product name      | Test_Prod            |
+      |Quantity          | 5                    |
+      |Unit              |g/ha                  |
+      |Date              |0                     |
+    And click on button "Save"
+    Then verify the success message as "Data added successfully"
+    And verify the product name displayed as "Test_Prod"
+    Then "Edit" the data on general information section
+    And add product in required data section
+      |Product name      | Test_Prod1            |
+    And click on button "Save"
+    Then verify the success message as "Data updated successfully"
+    And verify the product name displayed as "Test_Prod1"
+    And "Delete" the data on general information section
+    Then click on button "Yes, delete"
+    Then verify the success message as "Data successfully deleted"
+
+
+     ### Sandy setup: Activate Services>> Setup – Carbon >> Operational Data , Crop Level (Replicate - Multiple) ############
+  @Test11
+  Scenario: Add new crop, Edit and Delete for Operational Data, Crop Level
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Carbon"
+    Then click manage data button for "Operational Data"
+    Then click on Crop level button
+    And select operational data year as "2024"
+    And Select filter with data for Operational data
+      |filter        | data                 |
+      |Select farms  | ####Test_Farmm       |
+      |Select crop   | Amateur Veg Beetroot |
+    Then click on button "+ Add operations"
+    And add required field for Operational Data for Crop level
+      |field             | data                 |
+      |Operation group   | Crop Protection      |
+      |Operation type    | Adjuvants            |
+      |Product name      | Test_Prod            |
+      |Quantity          | 8                    |
+      |Unit              |g/ha                  |
+      |Date              |0                     |
+    And click on button "Save"
+    Then verify the success message as "Data added successfully"
+    And verify the product name displayed as "Test_Prod"
+    Then click on button "Replicate records"
+    And click on button "Select"
+    Then select "Product" checkbox to replicate records
+    And replicate filters for farm and fields
+      |field         | data           |
+      |Select farms  | ####Test_Farmm |
+      |Select years  | 2024           |
+    Then select first crop to replicate records
+    And user "Save" the added data
+    Then user "Ok" the added data
+    Then click on button "Edit multiple"
+    Then click on button "Select All"
+    Then click on button "Edit selected"
+    And add product in required data section
+      |Product name      | Test_Prod1            |
+    And click on button "Save"
+    Then verify the success message as "Data updated successfully"
+    And verify the product name displayed as "Test_Prod1"
+    Then click on button "Delete multiple"
+    Then click on button "Select All"
+    Then click on button "Delete selected"
+    Then click on button "Yes, delete"
+    Then verify the success message as "Data successfully deleted"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#########################BioDiversity Test Cases (Needs to be moved to another feature file)#########################################
+
   @Test
   Scenario: Add new single biodiversity crop[ed area, edit and delete
 
@@ -108,7 +366,7 @@ Feature: Activate service application
     Then user navigates to activate each service
     And click manage data button for "Biodiversity"
     Then click manage data button for "Cropped area"
-    And click on add records button
+    And click on Add records button
     Then enter cropped area details to calculate the impact of productive land
       |field             | data           |
       |Select year       | 2024           |

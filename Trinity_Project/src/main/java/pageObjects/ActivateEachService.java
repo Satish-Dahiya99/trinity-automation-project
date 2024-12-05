@@ -70,6 +70,18 @@ public class ActivateEachService extends BasePage{
     @FindBy(xpath = "//div[contains(@data-id,'auto-generated-row-basicInfo')]//input/..")
     WebElement generalInfoSelectAllCheckbox;
 
+    @FindBy(css = "input#productName")
+    WebElement productnameText;
+
+    @FindBy(xpath = "//*[contains(@class,'text-capitalize col')]")
+    List<WebElement> prodNameOperationalData;
+
+    @FindBy(xpath = "(//button[@class='accordion-button collapsed'])[1]")
+    WebElement firstCropToReplicateCropLevel;
+
+    @FindBy(xpath = "(//button[@class='accordion-button'])[1]/../following-sibling::div//input")
+    WebElement selectYearForfirstCropToReplicateCropLevel;
+
 
     String manageDataButton = "//div[text()='"+dynamicText+"']/..//button";
     String filterSelection = "//div[contains(@class,'"+dynamicText+"')]//div[contains(@id,'react-select')]";
@@ -83,9 +95,12 @@ public class ActivateEachService extends BasePage{
     String selectAllButton = "//*[text()='"+dynamicText+"']/../..//button";
     String filterButton = "//div[text()='"+dynamicText+"']/..//div[@data-value]";
     String bioDiversityGeneralInfo = "//div[contains(@class,'MuiBox-root')]//p[text()='"+dynamicText+"']/following-sibling::p";
-    String biodiversityActionButton = "//div[@data-field='actions']//*[contains(@data-testid,'"+dynamicText+"')]";
+    //String biodiversityActionButton = "//div[@data-field='actions']//*[contains(@data-testid,'"+dynamicText+"')]";
+    String biodiversityActionButton = "//*[contains(@data-testid,'"+dynamicText+"')]";
     String button = "//*[text()='"+dynamicText+"']";
     String managementPractActionButtons = "//div[contains(@class,'actionButtons')]//*[text()='"+dynamicText+"']";
+    String operationDataYear = "//*[@class='nav-item']/a[contains(@id,'"+dynamicText+"')]";
+    String selectDataToReplicate = "(//*[text()='"+dynamicText+"'])[2]/../input";
 
 
 
@@ -287,8 +302,15 @@ public class ActivateEachService extends BasePage{
     }
 
     public void performActionOnBiodiversityGeneralInformation(String actionName){
-        WebElement ele = prepareWebElementWithDynamicXpath(biodiversityActionButton, actionName);
-        ele.click();
+        try{
+            WebElement ele = prepareWebElementWithDynamicXpath(biodiversityActionButton, actionName);
+            TestUtil.waitForElementClickable(driver, ele, Duration.of(10, ChronoUnit.SECONDS));
+            ele.click();
+        } catch (Exception e) {
+            WebElement ele1 = prepareWebElementWithDynamicXpath(biodiversityActionButton, actionName);
+            ele1.click();
+        }
+
     }
 
     public void verifyNowRorsAreDisplayed(){
@@ -325,15 +347,12 @@ public class ActivateEachService extends BasePage{
         selectAllCheckboxforField.click();
     }
 
-    public void clickOnButton(String buttonName){
+    public void clickOnButton(String buttonName) throws InterruptedException {
         WebElement ele = prepareWebElementWithDynamicXpath(button, buttonName);
         TestUtil.waitForElementClickable(driver, ele, Duration.of(10, ChronoUnit.SECONDS));
+        TestUtil.staticWait(3000);
         ele.click();
     }
-
-//    public void verifyReplicatedData(String data){
-//        Assert.assertTrue(replicatedData.getText().equalsIgnoreCase(data), data+" is not displayed");
-//    }
 
     public void clickGeneralInformationSelectAllCheckBox() throws InterruptedException {
         TestUtil.waitForElementClickable(driver, generalInfoSelectAllCheckbox, Duration.of(10, ChronoUnit.SECONDS));
@@ -371,9 +390,63 @@ public class ActivateEachService extends BasePage{
             scrollToElement(ele1);
             ele1.click();
         }
+    }
 
+    public void clickOperationalDataYear(String year){
+        WebElement ele = prepareWebElementWithDynamicXpath(operationDataYear, year);
+        TestUtil.waitForElementClickable(driver, ele, Duration.of(10, ChronoUnit.SECONDS));
+        ele.click();
 
     }
+
+    public void selectFilterForOperationalData(String filter, String data) throws InterruptedException {
+        WebElement input = prepareWebElementWithDynamicXpath(filterInput, filter);
+        TestUtil.waitForElementClickable(driver, input, Duration.of(15, ChronoUnit.SECONDS));
+        TestUtil.staticWait(4000);
+        WebElement button = prepareWebElementWithDynamicXpath(filterButton, filter);
+        javaScriptExecutorClick(button);
+        TestUtil.staticWait(2000);
+        WebElement input1 = prepareWebElementWithDynamicXpath(filterInput, filter);
+        input1.sendKeys(data);
+        TestUtil.staticWait(2000);
+        input1.sendKeys(Keys.RETURN);
+
+    }
+
+    public void addProductforOperationalFlow(String prod_Name){
+        WebElement addProdButton = prepareWebElementWithDynamicXpath(button, "+ Add product");
+        addProdButton.click();
+        productnameText.sendKeys(prod_Name);
+        WebElement okButton = prepareWebElementWithDynamicXpath(button, "Ok");
+        okButton.click();
+
+    }
+
+    public boolean verifyProdName(String prodName){
+        for (WebElement ele : prodNameOperationalData){
+            if (ele.getText().equalsIgnoreCase(prodName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void verifyOperationDataProductName(String prodName){
+        Assert.assertTrue(verifyProdName(prodName), "Prod name "+ prodName+" is not displayed");
+    }
+
+    public void selectDataToReplicate(String dataField) throws InterruptedException {
+        WebElement ele = prepareWebElementWithDynamicXpath(selectDataToReplicate, dataField);
+        TestUtil.waitForElementClickable(driver, ele, Duration.of(10, ChronoUnit.SECONDS));
+        TestUtil.staticWait(3000);
+        ele.click();
+    }
+
+    public void selectCropYearToReplicateCropLevelData(){
+        firstCropToReplicateCropLevel.click();
+        selectYearForfirstCropToReplicateCropLevel.click();
+    }
+
 
 
 
