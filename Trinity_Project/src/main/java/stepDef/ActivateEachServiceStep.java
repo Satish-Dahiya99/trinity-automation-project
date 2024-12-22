@@ -299,7 +299,7 @@ public class ActivateEachServiceStep {
     }
 
     @And("add product in required data section")
-    public void addproductinrequireddatasection(DataTable dataTable){
+    public void addproductinrequireddatasection(DataTable dataTable) throws InterruptedException {
         List<List<String>> list = dataTable.asLists();
         activateEachService.addProductforOperationalFlow(list.get(0).get(1));
 
@@ -324,6 +324,11 @@ public class ActivateEachServiceStep {
     @Then("select first crop to replicate records")
     public void selectfirstcroptoreplicaterecords(){
         activateEachService.selectCropYearToReplicateCropLevelData();
+    }
+
+    @And("click the {string} breadcrumb item")
+    public void clickBreadcrumbItem(String itemName){
+        activateEachService.clickBreadcrumbItem(itemName);
     }
 
 

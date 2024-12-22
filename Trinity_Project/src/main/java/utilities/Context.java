@@ -12,6 +12,7 @@ public class Context extends BaseLib {
     private FarmSetup farmSetup;
     private EnterpriseData enterpriseData;
     private BioDiversity bioDiversity;
+    private InputPage inputPage;
 
     public Context(){
         setUp(FileReaderClass.readData("chromeBrowser"));
@@ -61,5 +62,13 @@ public class Context extends BaseLib {
             bioDiversity = new BioDiversity(driver);
         }
         return bioDiversity;
+    }
+
+    public InputPage getInputPage() {
+        if (inputPage == null){
+            inputPage = new InputPage(driver);
+        }
+
+        return inputPage;
     }
 }

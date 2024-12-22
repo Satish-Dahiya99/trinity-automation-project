@@ -413,10 +413,11 @@ public class ActivateEachService extends BasePage{
 
     }
 
-    public void addProductforOperationalFlow(String prod_Name){
+    public void addProductforOperationalFlow(String prod_Name) throws InterruptedException {
         WebElement addProdButton = prepareWebElementWithDynamicXpath(button, "+ Add product");
         addProdButton.click();
         productnameText.sendKeys(prod_Name);
+        TestUtil.staticWait(1000);
         WebElement okButton = prepareWebElementWithDynamicXpath(button, "Ok");
         okButton.click();
 

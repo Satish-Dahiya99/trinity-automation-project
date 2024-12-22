@@ -235,7 +235,7 @@ Feature: Activate service application
 
 
      ### Sandy setup: Activate Services>> Setup – Carbon >> Operational Data , Crop Level (Replicate - Multiple) ############
-  @Test11
+  @Test
   Scenario: Add new crop, Edit and Delete for Operational Data, Crop Level
 
     Given User logins to the application
@@ -283,7 +283,66 @@ Feature: Activate service application
     Then click on button "Select All"
     Then click on button "Delete selected"
     Then click on button "Yes, delete"
-    Then verify the success message as "Data successfully deleted"
+    Then verify the success message as "2 of 2 record(s) deleted."
+
+
+#####################################Input data For Crop Protection ######################
+
+  @Test11
+  Scenario: Add new crop and verify input data for crop protection
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Carbon"
+    Then click manage data button for "Operational Data"
+    Then click on Crop level button
+    And select operational data year as "2024"
+    And Select filter with data for Operational data
+      |filter        | data                 |
+      |Select farms  | ####Test_Farmm       |
+      |Select crop   | Amateur Veg Beetroot |
+    Then click on button "+ Add operations"
+    And add required field for Operational Data for Crop level
+      |field             | data                 |
+      |Operation group   | Crop Protection      |
+      |Operation type    | Adjuvants            |
+      |Product name      | ABC11                |
+      |Quantity          | 8                    |
+      |Unit              |g/ha                  |
+      |Date              |0                     |
+    And click on button "Save"
+    Then verify the success message as "Data added successfully"
+    And verify the product name displayed as "ABC11"
+    Then click the 'Setup – Carbon: Arable' breadcrumb item
+    Then click manage data button for "Input"
+    And click on setup button for 'Crop protection'
+    Then select the year as '2024'
+    And click edit button for product 'ABC11'
+    Then add required data for field 'Active ingredient concentration' as '10.00' for crop protection
+    And click on button "Save"
+    Then verify the success message as "Your records have been successfully updated."
+    And verify the crop protection product details for product 'ABC11' as value '10.00'
+    Then click the 'Setup – Carbon: Arable' breadcrumb item
+    Then click manage data button for "Operational Data"
+    Then click on Crop level button
+    And select operational data year as "2024"
+    And Select filter with data for Operational data
+      |filter        | data                 |
+      |Select farms  | ####Test_Farmm       |
+      |Select crop   | Amateur Veg Beetroot |
+    Then click on button "Delete multiple"
+    Then click on button "Select All"
+    Then click on button "Delete selected"
+    Then click on button "Yes, delete"
+    Then verify the success message as "1 of 1 record(s) deleted."
+
+
+
+
+
+
+
 
 
 
@@ -303,6 +362,42 @@ Feature: Activate service application
 
 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

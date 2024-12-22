@@ -67,6 +67,9 @@ public abstract class BasePage {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         return past.format(formatter);
 
+    }
 
+    public void clickBreadcrumbItem(String itemName){
+        driver.findElement(By.xpath(String.format("//li[@class='breadcrumb-item']/span[text()='%s']", itemName))).click();
     }
 }
