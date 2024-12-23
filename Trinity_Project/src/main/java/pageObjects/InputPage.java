@@ -21,7 +21,7 @@ public class InputPage extends BasePage {
     List<WebElement> productNameInTable;
 
     @FindBy(xpath = "(//div[contains(@class,'pageInputBox')]//p[text()])[2]")
-    WebElement numberOfPages;
+    List<WebElement> numberOfPages;
 
     @FindBy(xpath = "//div[contains(@class,'pageInputBox')]/following-sibling::div/button[2]")
     WebElement nextPageButton;
@@ -40,6 +40,8 @@ public class InputPage extends BasePage {
         super(driver);
         PageFactory.initElements(driver, this);
     }
+
+    private static int numbOfPages = 0;
 
     public void clickSetupButton(String inputFieldName){
         try{
@@ -62,9 +64,13 @@ public class InputPage extends BasePage {
     }
 
     public String selectEditButtonForProduct(String productName){
-        String [] pagesNum = numberOfPages.getText().split(" ");
-        int numOfPages = Integer.parseInt(pagesNum[1]);
-        for (int i =0; i< numOfPages; i++){
+        if (!numberOfPages.isEmpty()){
+            String [] pagesNum = numberOfPages.get(0).getText().split(" ");
+            numbOfPages = Integer.parseInt(pagesNum[1]);
+        }else {
+            numbOfPages =1;
+        }
+        for (int i =0; i< numbOfPages; i++){
             for (WebElement ele : productNameInTable){
                 if (ele.getText().equals(productName)){
                     scrollFromElementFromGivenAmount(prepareWebElementWithDynamicXpath(productEditButton, productName));
