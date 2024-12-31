@@ -13,6 +13,7 @@ public class Context extends BaseLib {
     private EnterpriseData enterpriseData;
     private BioDiversity bioDiversity;
     private InputPage inputPage;
+    private ResidueManagement residueManagement;
 
     public Context(){
         setUp(FileReaderClass.readData("chromeBrowser"));
@@ -70,5 +71,13 @@ public class Context extends BaseLib {
         }
 
         return inputPage;
+    }
+
+    public ResidueManagement getResidueManagement() {
+        if (residueManagement == null){
+            residueManagement = new ResidueManagement(driver);
+        }
+
+        return residueManagement;
     }
 }

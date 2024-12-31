@@ -112,7 +112,7 @@ public class ActivateEachService extends BasePage{
     }
 
     public void goToActivateEachSearch(){
-        activateEachSearch.click();
+        javaScriptExecutorClick(activateEachSearch);
     }
 
     public void clickCarbonManageData() throws InterruptedException {
@@ -350,7 +350,7 @@ public class ActivateEachService extends BasePage{
     public void clickOnButton(String buttonName) throws InterruptedException {
         WebElement ele = prepareWebElementWithDynamicXpath(button, buttonName);
         TestUtil.waitForElementClickable(driver, ele, Duration.of(10, ChronoUnit.SECONDS));
-        TestUtil.staticWait(3000);
+        TestUtil.staticWait(4000);
         ele.click();
     }
 
