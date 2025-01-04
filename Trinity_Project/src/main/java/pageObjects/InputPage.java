@@ -99,9 +99,7 @@ public class InputPage extends BasePage {
     }
 
     public void selectRequiredDataToAddCrop(String field, String data) throws InterruptedException {
-        //TestUtil.waitForElementClickable(driver, selectField, Duration.of(10, ChronoUnit.SECONDS));
         TestUtil.staticWait(5000);
-        //selectField.click();
         WebElement input = prepareWebElementWithDynamicXpath(cropReqDataInput, field);
         TestUtil.waitForElementClickable(driver, input, Duration.of(10, ChronoUnit.SECONDS));
         input.clear();

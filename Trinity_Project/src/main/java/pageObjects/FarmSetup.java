@@ -56,12 +56,6 @@ public class FarmSetup extends BasePage {
     String editButton = "//*[text()='"+dynamicText+"']/../..//*[@data-testid='EditOutlinedIcon']";
     String deleteButton = "//*[text()='"+dynamicText+"']/../..//*[@data-testid='DeleteOutlineIcon']";
 
-//    String editButton = "//*[text()='"+dynamicText+"']/..//*[@data-testid='EditOutlinedIcon']/..";
-//    String deleteButton = "//*[text()='"+dynamicText+"']/..//*[@data-testid='DeleteOutlineIcon']/..";
-
-//    String editButton = "//*[text()='"+dynamicText+"']/..//div[@style][2]";
-//    String deleteButton = "//*[text()='"+dynamicText+"']/..//div[@style][1]";
-
 
     Logger log = BaseLib.getLog(this.getClass().getName());
 

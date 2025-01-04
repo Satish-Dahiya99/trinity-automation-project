@@ -507,7 +507,7 @@ Feature: Activate service application
 
      #####################################Single Add and delete multiple data for Residue management ######################
 
-  @Test11
+  @Test
   Scenario: Single Add and delete multiple data for Residue management
 
     Given User logins to the application
@@ -549,6 +549,127 @@ Feature: Activate service application
     Then click on button "Delete selected"
     Then click on Yes, Delete button
     And verify No row text is displayed
+
+
+    #####################################Add, edit and delete single data for Soil ######################
+
+  @Test
+  Scenario: Single Add edit and delete data for Soil
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Carbon"
+    Then click manage data button for "Soil"
+    And select filter on soil page
+      | filter             | data           |
+      | Select farms       | ####Test_Farmm |
+      | Select field       | Test_Field     |
+      | Remove year filter | 2025           |
+      | Select years       | 2024           |
+    Then click on button "+ Add soil data"
+    And select required data to add soil
+      | field                     | data  |
+      | Soil type                 | Sand  |
+      | SOC %                     | 2     |
+      | SOM %                     | 3     |
+      | SOM laboratory method     | DUMAS |
+      | Sampling depth (cm)       | 4     |
+      | Number of samples         | 5     |
+      | Soil bulk density (g/cm3) | 6     |
+      | SOM test date             | 150   |
+    And click on button "Save"
+    Then verify the success message as "Soil added successfully"
+    And verify the added required data in row '1' in soil data page
+      | field                 | data  |
+      | Soil type             | Sand  |
+      | SOM laboratory method | Dumas |
+    Then click on 'Edit' button for required data in row '1' in soil data page
+    And update required data to add soil
+      | Soil type             | Loamy sand       |
+      | SOM laboratory method | Loss on ignition |
+    And click on button "Save"
+    Then verify the success message as "Soil updated successfully"
+    And verify the added required data in row '1' in soil data page
+      | field                 | data             |
+      | Soil type             | Loamy Sand       |
+      | SOM laboratory method | Loss on ignition |
+    Then click on 'Delete' button for required data in row '1' in soil data page
+    And click on Yes, delete button
+    Then verify after deleting all data No records are present text is displayed
+
+
+    #####################################Add, edit and delete multiple data for Soil ######################
+
+  @Test11
+  Scenario: Multiple Add edit and delete data for Soil
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Carbon"
+    Then click manage data button for "Soil"
+    And select filter on soil page
+      | filter             | data           |
+      | Select farms       | ####Test_Farmm |
+      | Select field       | Test_Field     |
+      | Remove year filter | 2025           |
+      | Select years       | 2024           |
+    Then click on button "+ Add soil data"
+    And select required data to add soil
+      | field                     | data  |
+      | Soil type                 | Sand  |
+      | SOC %                     | 2     |
+      | SOM %                     | 3     |
+      | SOM laboratory method     | DUMAS |
+      | Sampling depth (cm)       | 4     |
+      | Number of samples         | 5     |
+      | Soil bulk density (g/cm3) | 6     |
+      | SOM test date             | 150   |
+    And click on button "Save"
+    Then verify the success message as "Soil added successfully"
+    When click on button "Edit multiple"
+    And click on button "Select All"
+    Then click on button "Edit selected"
+    And update required data to add soil
+      | Soil type             | Loamy sand       |
+      | SOM laboratory method | Loss on ignition |
+    And click on button "Save"
+    And click on button on popup having name as 'Yes'
+    Then verify the success message as "Soil data updated successfully"
+    And verify the added required data in row '1' in soil data page
+      | field                 | data             |
+      | Soil type             | Loamy Sand       |
+      | SOM laboratory method | Loss on ignition |
+    When click on button "Delete multiple"
+    And click on button "Select All"
+    Then click on button "Delete selected"
+    And click on Yes, delete button
+    Then verify the success message as "Data successfully deleted"
+    Then verify after deleting all data No records are present text is displayed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
