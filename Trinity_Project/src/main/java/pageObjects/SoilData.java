@@ -32,8 +32,8 @@ public class SoilData extends BasePage {
     String selectDropdownButton = "//*[text()='" + dynamicText + "']/..//div[contains(@class,'-indicatorContainer')]";
     String dropdownValues = "//*[text()='" + dynamicText + "']";
     String addedRequiredData = "(//div[contains(@class,'selectall-td selectcolumn row')])[" + dynamicText + "]/div";
-    String action = "(//div[contains(@class,'selectall-td selectcolumn row')])[%s]//*[contains(@data-testid,'"+dynamicText+"')]";
-    String buttonName = "//div[@class='modal-footer']//*[text()='"+dynamicText+"']";
+    String action = "(//div[contains(@class,'selectall-td selectcolumn row')])[%s]//*[contains(@data-testid,'" + dynamicText + "')]";
+    String buttonName = "//div[@class='modal-footer']//*[text()='" + dynamicText + "']";
 
     Logger log = BaseLib.getLog(this.getClass().getName());
 
@@ -114,16 +114,16 @@ public class SoilData extends BasePage {
 
     public void verifyRequiredData(String row, String value) throws InterruptedException {
 
-        Assert.assertTrue(getRequiredData(row, value), value+" is not displayed");
+        Assert.assertTrue(getRequiredData(row, value), value + " is not displayed");
     }
 
-    public void clickActionButtonForAddedRequiredData(String actionName, String row){
+    public void clickActionButtonForAddedRequiredData(String actionName, String row) {
         String getRow = String.format(action, row);
         prepareWebElementWithDynamicXpath(getRow, actionName).click();
 
     }
 
-    public void verifyTextAfterDeletingAllData(){
+    public void verifyTextAfterDeletingAllData() {
         TestUtil.waitForElementVisible(driver, noRecordsPresent, Duration.of(10, ChronoUnit.SECONDS));
         Assert.assertEquals(noRecordsPresent.getText(), "No records are present");
     }
@@ -136,13 +136,11 @@ public class SoilData extends BasePage {
 
     }
 
-    public void clickButton(String button){
+    public void clickButton(String button) {
         TestUtil.waitForElementClickable(driver, prepareWebElementWithDynamicXpath(buttonName, button), Duration.of(10, ChronoUnit.SECONDS));
         prepareWebElementWithDynamicXpath(buttonName, button).click();
 
     }
-
-
 
 
 }

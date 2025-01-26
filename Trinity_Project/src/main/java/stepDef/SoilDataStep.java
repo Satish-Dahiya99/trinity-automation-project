@@ -51,7 +51,7 @@ public class SoilDataStep {
     }
 
     @Then("click on {string} button for required data in row {string} in soil data page")
-    public void clickOnActionButtonForRequiredDataInRow(String actionName, String row ) {
+    public void clickOnActionButtonForRequiredDataInRow(String actionName, String row) {
         soilData.clickActionButtonForAddedRequiredData(actionName, row);
     }
 
@@ -63,12 +63,12 @@ public class SoilDataStep {
     }
 
     @Then("verify after deleting all data No records are present text is displayed")
-    public void verifyAfterDeletingAllData(){
+    public void verifyAfterDeletingAllData() {
         soilData.verifyTextAfterDeletingAllData();
     }
 
     @And("click on button on popup having name as {string}")
-    public void clickOnButtonHavingNameAs(String button){
+    public void clickOnButtonHavingNameAs(String button) {
         soilData.clickButton(button);
     }
 

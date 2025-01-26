@@ -765,16 +765,16 @@ Feature: Activate service application
     And select required data
       | field                             | data   |
       | Fuel type - Refrigerate on Farm   | Biogas |
-      | Fuel unit -Refrigerate on Farm    | kWh |
+      | Fuel unit -Refrigerate on Farm    | kWh    |
       | Fuel Amount - Refrigerate on Farm | 7      |
     And click on button "Save"
     Then verify the success message as "Fuel dry-storage updated successfully"
     And verify the following fuel type on fuel drying and storage page in row "1"
       | Biodiesel ME |
-      | Biogas  |
+      | Biogas       |
     And verify the following fuel type on fuel drying and storage page in row "2"
-      | Biodiesel ME      |
-      | Biogas|
+      | Biodiesel ME |
+      | Biogas       |
     When click on button "Delete multiple"
     When click on button "Select All"
     When click on button "Delete selected"
