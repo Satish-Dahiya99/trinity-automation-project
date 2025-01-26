@@ -601,7 +601,7 @@ Feature: Activate service application
 
     #####################################Add, edit and delete multiple data for Soil ######################
 
-  @Test11
+  @Test
   Scenario: Multiple Add edit and delete data for Soil
 
     Given User logins to the application
@@ -647,6 +647,153 @@ Feature: Activate service application
     And click on Yes, delete button
     Then verify the success message as "Data successfully deleted"
     Then verify after deleting all data No records are present text is displayed
+
+
+    #####################################Add, edit and delete single data for Fuel – Drying & Storage ######################
+
+  @Test
+  Scenario: Single Add edit and delete data for Fuel – Drying & Storage
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Carbon"
+    Then click manage data button for "Fuel – Drying & Storage"
+    And select operational data year as "2024"
+    Then select filter on Fuel Drying and Storage page
+      | filter       | data                 |
+      | Select farms | ####Test_Farmm       |
+      | Select crop  | Amateur Veg Beetroot |
+    Then click on button "+ Add fuel data"
+    And select the "Dry On Farm" checkbox
+    And select required data
+      | field                        | data        |
+      | Fuel type - Drying on Farm   | Bio ethanol |
+      | Fuel unit - Drying on Farm   | litres      |
+      | Fuel Amount - Drying on Farm | 5           |
+    And select the "Store On Farm" checkbox
+    And select required data
+      | field                             | data       |
+      | Fuel type - Refrigerate on Farm   | Bio Petrol |
+      | Fuel unit -Refrigerate on Farm    | litres     |
+      | Fuel Amount - Refrigerate on Farm | 9          |
+    And click on button "Save"
+    Then verify the success message as "Fuel dry-storage added successfully"
+    And verify the following fuel type on fuel drying and storage page in row "1"
+      | Bio ethanol |
+      | Bio Petrol  |
+    Then click on "Edit" button for fuel dry and storage data
+    And edit below required data
+      | field                           | data          |
+      | Fuel type - Drying on Farm      | Biodiesel HVO |
+      | Fuel unit - Drying on Farm      | litres        |
+      | Fuel type - Refrigerate on Farm | Biogas        |
+      | Fuel unit -Refrigerate on Farm  | kWh           |
+    And click on button "Save"
+    Then verify the success message as "Fuel dry-storage updated successfully"
+    And verify the following fuel type on fuel drying and storage page in row "1"
+      | Biodiesel HVO |
+      | Biogas        |
+    Then click on "Delete" button for fuel dry and storage data
+    And click on Yes, delete button
+    Then verify the success message as "Data successfully deleted"
+    Then verify after deleting all data No records are present text is displayed
+
+
+
+     #####################################Add, edit and delete Multiple data for Fuel – Drying & Storage ######################
+
+  @Test11
+  Scenario: Multiple Add edit and delete data for Fuel – Drying & Storage
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Carbon"
+    Then click manage data button for "Fuel – Drying & Storage"
+    And select operational data year as "2024"
+    Then select filter on Fuel Drying and Storage page
+      | filter       | data                 |
+      | Select farms | ####Test_Farmm       |
+      | Select crop  | Amateur Veg Beetroot |
+    Then click on button "+ Add fuel data"
+    And select the "Dry On Farm" checkbox
+    And select required data
+      | field                        | data        |
+      | Fuel type - Drying on Farm   | Bio ethanol |
+      | Fuel unit - Drying on Farm   | litres      |
+      | Fuel Amount - Drying on Farm | 5           |
+    And select the "Store On Farm" checkbox
+    And select required data
+      | field                             | data       |
+      | Fuel type - Refrigerate on Farm   | Bio Petrol |
+      | Fuel unit -Refrigerate on Farm    | litres     |
+      | Fuel Amount - Refrigerate on Farm | 9          |
+    And click on button "Save"
+    Then verify the success message as "Fuel dry-storage added successfully"
+    Then click on button "+ Add fuel data"
+    And select the "Dry On Farm" checkbox
+    And select required data
+      | field                        | data      |
+      | Fuel type - Drying on Farm   | Biodiesel |
+      | Fuel unit - Drying on Farm   | litres    |
+      | Fuel Amount - Drying on Farm | 2         |
+    And select the "Store On Farm" checkbox
+    And select required data
+      | field                             | data          |
+      | Fuel type - Refrigerate on Farm   | Biodiesel HVO |
+      | Fuel unit -Refrigerate on Farm    | litres        |
+      | Fuel Amount - Refrigerate on Farm | 4             |
+    And click on button "Save"
+    Then verify the success message as "Fuel dry-storage added successfully"
+    And verify the following fuel type on fuel drying and storage page in row "1"
+      | Bio ethanol |
+      | Bio Petrol  |
+    And verify the following fuel type on fuel drying and storage page in row "2"
+      | Biodiesel     |
+      | Biodiesel HVO |
+    When click on button "Edit multiple"
+    And click on button "Select All"
+    And click on button "Edit selected"
+    And select the "Dry On Farm" checkbox
+    And select required data
+      | field                        | data         |
+      | Fuel type - Drying on Farm   | Biodiesel ME |
+      | Fuel unit - Drying on Farm   | litres       |
+      | Fuel Amount - Drying on Farm | 3            |
+    And select the "Store On Farm" checkbox
+    And select required data
+      | field                             | data   |
+      | Fuel type - Refrigerate on Farm   | Biogas |
+      | Fuel unit -Refrigerate on Farm    | kWh |
+      | Fuel Amount - Refrigerate on Farm | 7      |
+    And click on button "Save"
+    Then verify the success message as "Fuel dry-storage updated successfully"
+    And verify the following fuel type on fuel drying and storage page in row "1"
+      | Biodiesel ME |
+      | Biogas  |
+    And verify the following fuel type on fuel drying and storage page in row "2"
+      | Biodiesel ME      |
+      | Biogas|
+    When click on button "Delete multiple"
+    When click on button "Select All"
+    When click on button "Delete selected"
+    And click on Yes, delete button
+    Then verify the success message as "Data successfully deleted"
+    Then verify after deleting all data No records are present text is displayed
+
+
+
+
+    
+
+
+
+
+
+
+
+
 
 
 

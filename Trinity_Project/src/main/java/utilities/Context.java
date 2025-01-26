@@ -15,6 +15,7 @@ public class Context extends BaseLib {
     private InputPage inputPage;
     private ResidueManagement residueManagement;
     private SoilData soilData;
+    private FuelDryingStorage fuelDryingStorage;
 
     public Context() {
         setUp(FileReaderClass.readData("chromeBrowser"));
@@ -88,5 +89,12 @@ public class Context extends BaseLib {
         }
 
         return soilData;
+    }
+
+    public FuelDryingStorage getFuelDryingStorage() {
+        if (fuelDryingStorage == null) {
+            fuelDryingStorage = new FuelDryingStorage(driver);
+        }
+        return fuelDryingStorage;
     }
 }
