@@ -16,6 +16,7 @@ public class Context extends BaseLib {
     private ResidueManagement residueManagement;
     private SoilData soilData;
     private FuelDryingStorage fuelDryingStorage;
+    private FuelMachinery fuelMachinery;
 
     public Context() {
         setUp(FileReaderClass.readData("chromeBrowser"));
@@ -97,4 +98,13 @@ public class Context extends BaseLib {
         }
         return fuelDryingStorage;
     }
+
+    public FuelMachinery getFuelMachinery() {
+        if (fuelMachinery == null) {
+            fuelMachinery = new FuelMachinery(driver);
+        }
+        return fuelMachinery;
+    }
+
+
 }
