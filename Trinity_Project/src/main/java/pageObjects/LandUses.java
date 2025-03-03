@@ -1,7 +1,6 @@
 package pageObjects;
 
 import base.BaseLib;
-import io.cucumber.datatable.DataTable;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
