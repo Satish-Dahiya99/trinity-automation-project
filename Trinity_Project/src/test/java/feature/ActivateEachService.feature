@@ -565,7 +565,7 @@ Feature: Activate service application
       | filter             | data           |
       | Select farms       | ####Test_Farmm |
       | Select field       | Test_Field     |
-      | Remove year filter | 2025           |
+      | Remove year filter | 2026           |
       | Select years       | 2024           |
     Then click on button "+ Add soil data"
     And select required data to add soil
@@ -613,7 +613,7 @@ Feature: Activate service application
       | filter             | data           |
       | Select farms       | ####Test_Farmm |
       | Select field       | Test_Field     |
-      | Remove year filter | 2025           |
+      | Remove year filter | 2026           |
       | Select years       | 2024           |
     Then click on button "+ Add soil data"
     And select required data to add soil
@@ -703,7 +703,7 @@ Feature: Activate service application
 
      #####################################Add, edit and delete Multiple data for Fuel – Drying & Storage ######################
 
-  @Test11
+  @Test
   Scenario: Multiple Add edit and delete data for Fuel – Drying & Storage
 
     Given User logins to the application
