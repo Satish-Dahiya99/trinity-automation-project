@@ -1,4 +1,4 @@
-Feature: LandUses single and multiple
+Feature: LandUses Field Level and Farm level(Enterprise) with single and multiple data flow
 
 
    #####################################Add, edit and delete Single data for Land Uses for (Field level)######################
@@ -51,7 +51,7 @@ Feature: LandUses single and multiple
 
     #####################################Add, edit and delete Multiple (Replicate) data for Land Uses for (Field level)######################
 
-  @Test11
+  @Test
   Scenario: Add, edit and delete multiple (replicate) data for Land Uses for Field level
 
     Given User logins to the application
@@ -117,6 +117,136 @@ Feature: LandUses single and multiple
     Then click on button "Yes, delete"
     Then verify the success message as "Record(s) deleted successfully"
     Then verify after deleting all data No records are present text is displayed
+
+
+    #####################################Add, edit and delete Single data for Land Uses for (Farm level - Enterprise)######################
+
+  @Test
+  Scenario: Single Add, edit and delete Single data for Land Uses for (Farm level - Enterprise)
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Carbon"
+    Then click manage data button for "Land uses"
+    Then click on Farm level (Enterprise) button
+    And select land use data year as "2024"
+    And Select filter with data for land use Farm Level Enterprise
+      | filter       | data           |
+      | Select farms | ####Test_Farmm |
+    Then click on button "+ Add land use"
+    And add required encouraged data for land use Farm Level Enterprise
+      | field      | data           |
+      | Category   | Arable         |
+      | Type       | Linear feature |
+      | Name       | Buffer strip   |
+      | Area (ha)  | 5              |
+      | Length (m) | 10             |
+    And click on button "Save"
+    Then verify the success message as "Data saved successfully."
+    And verify the below land uses data in row "1"
+      | field | data           |
+      | Type  | Linear feature |
+      | Name  | Buffer strip   |
+    And for row "1" data for land uses click on "Edit" button
+    And add required encouraged data for land use Farm Level Enterprise
+      | field         | data                    |
+      | Category      | Arable                  |
+      | Type          | Point feature           |
+      | Name          | Fruit tree (individual) |
+      | Area (ha)     | 5                       |
+      | Number (tree) | 55                      |
+    And click on button "Save"
+    Then verify the success message as "Data saved successfully."
+    And verify the below land uses data in row "1"
+      | field | data          |
+      | Type  | Point feature |
+      | Name  | Fruit tree    |
+    And for row "1" data for land uses click on "Delete" button
+    Then click on button "Yes, delete"
+    Then verify the success message as "Data successfully deleted"
+    Then verify after deleting all data No records are present text is displayed
+
+
+     #####################################Add, edit and delete Multiple (Replicate) data for Land Uses for (Farm level - Enterprise)######################
+
+  @Test11
+  Scenario: Single Add, edit and delete Multiple (Replicate) data for Land Uses for (Farm level - Enterprise)
+
+    Given User logins to the application
+    When user clicks on sandy setup
+    Then user navigates to activate each service
+    And click manage data button for "Carbon"
+    Then click manage data button for "Land uses"
+    Then click on Farm level (Enterprise) button
+    And select land use data year as "2024"
+    And Select filter with data for land use Farm Level Enterprise
+      | filter       | data           |
+      | Select farms | ####Test_Farmm |
+    Then click on button "+ Add land use"
+    And add required encouraged data for land use Farm Level Enterprise
+      | field      | data           |
+      | Category   | Arable         |
+      | Type       | Linear feature |
+      | Name       | Buffer strip   |
+      | Area (ha)  | 5              |
+      | Length (m) | 10             |
+    And click on button "Save"
+    Then verify the success message as "Data saved successfully."
+    Then click on button "Replicate records"
+    And click on button "Select"
+    And select filters on replicate records page for Farm Level
+      | field        | data           |
+      | Select farms | ####Test_Farmm |
+    Then expand the "####Test_Farmm" farm on replicate records to select year "2024"
+    And user clicks on "Save" button on replicate page
+    And user clicks on "Ok" button on replicate page
+    And verify the below land uses data in row "1"
+      | field | data           |
+      | Type  | Linear feature |
+      | Name  | Buffer strip   |
+    And verify the below land uses data in row "2"
+      | field | data           |
+      | Type  | Linear feature |
+      | Name  | Buffer strip   |
+    Then click on button "Edit multiple"
+    And click on button "Select All"
+    Then click on button "Edit selected"
+    And add required encouraged data for land use Farm Level Enterprise
+      | field         | data                    |
+      | Category      | Arable                  |
+      | Type          | Point feature           |
+      | Name          | Fruit tree (individual) |
+      | Area (ha)     | 5                       |
+      | Number (tree) | 55                      |
+    And click on button "Save"
+    Then verify the success message as "Data updated successfully"
+    And verify the below land uses data in row "1"
+      | field | data          |
+      | Type  | Point feature |
+      | Name  | Fruit tree    |
+    And verify the below land uses data in row "2"
+      | field | data          |
+      | Type  | Point feature |
+      | Name  | Fruit tree    |
+    Then click on button "Delete multiple"
+    And click on button "Select All"
+    Then click on button "Delete selected"
+    Then click on button "Yes, delete"
+    Then verify the success message as "Data successfully deleted"
+    Then verify after deleting all data No records are present text is displayed
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

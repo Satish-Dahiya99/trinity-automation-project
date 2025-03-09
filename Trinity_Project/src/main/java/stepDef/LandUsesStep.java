@@ -78,4 +78,33 @@ public class LandUsesStep {
     public void userClicksOnActionButtonOnReplicatePage(String actionButton) {
         landUses.saveOrCancleButton(actionButton);
     }
+
+    @Then("Select filter with data for land use Farm Level Enterprise")
+    public void selectFilterWithDataForLandUseFarmLevelEnterprise(DataTable filterData) throws InterruptedException {
+        List<List<String>> data = filterData.asLists();
+        landUses.selectFilterForLandUselData(data.get(1).get(0), data.get(1).get(1));
+    }
+
+    @And("add required encouraged data for land use Farm Level Enterprise")
+    public void addRequiredEncouragedDataForLandUseFarmLevel(DataTable dataTable) throws InterruptedException {
+        List<List<String>> data = dataTable.asLists();
+        landUses.selectRequiredDataToAddLandUse(data.get(1).get(0), data.get(1).get(1));
+        landUses.selectRequiredDataToAddLandUse(data.get(2).get(0), data.get(2).get(1));
+        landUses.selectRequiredDataToAddLandUse(data.get(3).get(0), data.get(3).get(1));
+        landUses.selectRequiredDataToAddLandUse(data.get(4).get(0), data.get(4).get(1));
+        landUses.selectRequiredDataToAddLandUse(data.get(5).get(0), data.get(5).get(1));
+
+    }
+
+    @And("select filters on replicate records page for Farm Level")
+    public void selectFiltersOnReplicateRecordsPageForFarmLevel(DataTable dataTable) throws InterruptedException {
+        List<List<String>> data = dataTable.asLists();
+        landUses.selectFilterOnReplicateRecordPage(data.get(1).get(0), data.get(1).get(1));
+    }
+
+    @Then("expand the {string} farm on replicate records to select year {string}")
+    public void expandFarmOnReplicateRecordsToSelectYear(String fieldName, String year) {
+        landUses.expandFieldOnReplicatePage(fieldName);
+        landUses.selectYearForSelectedFieldOnReplicatePage(year);
+    }
 }
