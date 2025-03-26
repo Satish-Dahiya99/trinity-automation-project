@@ -156,23 +156,7 @@ Feature: Sandy setup: Activate Services >> Setup - Water & Nitrogen Management: 
 
 
 
-#    Then click on button "Add records"
-#    And add required data for cropping data
-#      | field             | data       |
-#      | Crop type         | Cover crop |
-#      | Crop name         | Blue Lupin |
-#      | Crop variety      | Azuro      |
-#      | Tillage method    | Min till   |
-#      | Working area (ha) | 2          |
-#      | Yield (t/ha)      | 4          |
-#    Then set "Planting date" for year "2024"
-#    Then set "Harvest date" for year "2024"
-#    And click on button "Save"
-#    Then verify the success message as "Data added successfully!"
-#    Then click on button "Bulk edit"
-#    And click on "Edit multiple" button
-#    Then check the select all checkbox
-#    And click on button "Edit selected"
+
 
 
 
