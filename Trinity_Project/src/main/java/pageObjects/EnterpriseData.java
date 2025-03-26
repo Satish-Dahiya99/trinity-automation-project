@@ -109,11 +109,11 @@ public class EnterpriseData extends BasePage{
     public void clickButton(String buttonName) throws InterruptedException {
         WebElement ele = prepareWebElementWithDynamicXpath(button, buttonName);
         TestUtil.waitForElementClickable(driver, ele, Duration.of(10, ChronoUnit.SECONDS));
-        TestUtil.staticWait(5000);
+        TestUtil.staticWait(2000);
         try{
             javaScriptExecutorClick(ele);
         } catch (Exception e) {
-            TestUtil.staticWait(4000);
+            TestUtil.staticWait(2000);
             WebElement ele1 = prepareWebElementWithDynamicXpath(button, buttonName);
             ele1.click();
         }

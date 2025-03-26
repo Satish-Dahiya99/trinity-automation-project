@@ -170,7 +170,7 @@ Feature: LandUses Field Level and Farm level(Enterprise) with single and multipl
 
      #####################################Add, edit and delete Multiple (Replicate) data for Land Uses for (Farm level - Enterprise)######################
 
-  @Test11
+  @Test
   Scenario: Single Add, edit and delete Multiple (Replicate) data for Land Uses for (Farm level - Enterprise)
 
     Given User logins to the application
