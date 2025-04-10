@@ -57,7 +57,7 @@ Feature: Sandy setup: Activate Services >> Setup - Water & Nitrogen Management: 
 
     #####################################Add, edit and delete Multiple data for Cropping Data######################
 
-  @Test11
+  @Test
   Scenario: Multiple Add, edit and delete Single data for Cropping Data
 
     Given User logins to the application

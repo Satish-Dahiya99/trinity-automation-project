@@ -110,7 +110,7 @@ public class WaterNitroMngCroppingData extends BasePage {
         return false;
     }
 
-    public void verifyRequiredLandUsesData(String row, String value) throws InterruptedException {
+    public void verifyRequiredCroppingData(String row, String value) throws InterruptedException {
 
         Assert.assertTrue(getRequiredCroppingData(row, value), value + " is not displayed");
     }

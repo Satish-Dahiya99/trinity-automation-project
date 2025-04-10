@@ -19,6 +19,7 @@ public class Context extends BaseLib {
     private FuelMachinery fuelMachinery;
     private LandUses landUses;
     private WaterNitroMngCroppingData waterNitroMngCroppingData;
+    private WaterNitroMngOperations waterNitroMngOperations;
 
     public Context() {
         setUp(FileReaderClass.readData("chromeBrowser"));
@@ -122,6 +123,12 @@ public class Context extends BaseLib {
         return waterNitroMngCroppingData;
     }
 
+    public WaterNitroMngOperations getWaterNitroMngOperations() {
+        if (waterNitroMngOperations == null) {
+            waterNitroMngOperations = new WaterNitroMngOperations(driver);
+        }
+        return waterNitroMngOperations;
+    }
 
 
 }

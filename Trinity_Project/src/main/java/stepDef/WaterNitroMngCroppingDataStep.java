@@ -49,9 +49,9 @@ public class WaterNitroMngCroppingDataStep {
     @And("verify the below cropping data in row {string}")
     public void verifyBelowCroppingData(String row, DataTable dataTable) throws InterruptedException {
         List<List<String>> data = dataTable.asLists();
-        waterNitroMngCroppingData.verifyRequiredLandUsesData(row, data.get(1).get(1));
-        waterNitroMngCroppingData.verifyRequiredLandUsesData(row, data.get(2).get(1));
-        waterNitroMngCroppingData.verifyRequiredLandUsesData(row, data.get(3).get(1));
+        waterNitroMngCroppingData.verifyRequiredCroppingData(row, data.get(1).get(1));
+        waterNitroMngCroppingData.verifyRequiredCroppingData(row, data.get(2).get(1));
+        waterNitroMngCroppingData.verifyRequiredCroppingData(row, data.get(3).get(1));
     }
 
     @Then("for row {string} data click on {string} action button")
